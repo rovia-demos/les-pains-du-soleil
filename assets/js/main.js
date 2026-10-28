@@ -30,17 +30,22 @@
   let langV = 0; // change à chaque changement de langue (évite de restaurer un ancien texte découpé)
 
   // ---------- Défilement fluide ----------
+  // seulement à la souris : au doigt, le défilement reste celui du téléphone (sinon la page saute quand la
+  // barre d'adresse apparaît ou disparaît)
   let lenis = null;
-  if (!reduce) {
+  if (!reduce && finePointer) {
     lenis = new Lenis({ lerp: 0.09, smoothWheel: true });
     lenis.on('scroll', ScrollTrigger.update);
     gsap.ticker.add((t) => lenis.raf(t * 1000));
     gsap.ticker.lagSmoothing(0);
   }
+  // bloque le défilement de la page (chargement, menu, fenêtres)
+  const lock = (on) => (lenis ? (on ? lenis.stop() : lenis.start()) : document.documentElement.classList.toggle('is-locked', on));
   function goTo(target) {
+    const behavior = reduce ? 'auto' : 'smooth';
     if (lenis) lenis.scrollTo(target, { duration: 1.4 });
-    else if (target === 0) scrollTo(0, 0);
-    else target.scrollIntoView();
+    else if (target === 0) scrollTo({ top: 0, behavior });
+    else target.scrollIntoView({ behavior });
   }
   document.addEventListener('click', (e) => {
     const a = e.target.closest('a[href^="#"]');
@@ -94,14 +99,14 @@
     loader.remove();
     heroIn();
   } else {
-    lenis && lenis.stop();
+    lock(true);
     gsap.timeline()
       .to('.loader__ring circle', { strokeDashoffset: 0, duration: 1.2, ease: 'power2.inOut' })
       .from('.loader__sun', { scale: 0.3, rotate: -120, opacity: 0, duration: 1.3, ease: 'expo.out' }, 0)
       .from('.loader__word span', { yPercent: 120, opacity: 0, stagger: 0.07, duration: 0.9, ease: 'expo.out' }, 0.25)
       .to(loader, { clipPath: 'inset(0% 0% 100% 0%)', duration: 1.1, ease: 'expo.inOut' }, '+=0.1')
       .add(heroIn, '-=0.6')
-      .add(() => { loader.remove(); lenis && lenis.start(); });
+      .add(() => { loader.remove(); lock(false); });
   }
 
   // ---------- Hero au défilement ----------
@@ -120,19 +125,20 @@
   const navUpdate = (self) => {
     const y = scrollY;
     nav.classList.toggle('is-scrolled', y > 40);
-    nav.classList.toggle('is-hidden', !menuOpen && self.direction === 1 && y > VH * 0.9);
+    // au doigt la barre reste en place : elle bougerait en même temps que la barre d'adresse du téléphone
+    nav.classList.toggle('is-hidden', finePointer && !menuOpen && self.direction === 1 && y > VH * 0.9);
   };
   // onRefresh aussi : un recalcul de ScrollTrigger peut passer par le haut de page sans nouvel onUpdate
   ScrollTrigger.create({ start: 0, end: 'max', onUpdate: navUpdate, onRefresh: navUpdate });
   function openMenu() {
     menuOpen = true; menu.hidden = false; burger.setAttribute('aria-expanded', 'true');
-    lenis && lenis.stop();
+    lock(true);
     if (!reduce) gsap.fromTo('.menu__links a', { yPercent: 60, opacity: 0 }, { yPercent: 0, opacity: 1, stagger: 0.05, duration: 0.7, ease: 'expo.out' });
   }
   function closeMenu() {
     if (!menuOpen) return;
     menuOpen = false; menu.hidden = true; burger.setAttribute('aria-expanded', 'false');
-    lenis && lenis.start();
+    lock(false);
   }
   burger.addEventListener('click', () => (menuOpen ? closeMenu() : openMenu()));
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeMenu(); });
@@ -198,7 +204,8 @@
       x: () => -dist(), ease: 'none',
       scrollTrigger: {
         trigger: '.timeline', start: 'center center', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true,
-        snap: { snapTo, duration: { min: 0.2, max: 0.6 }, delay: 0.08, ease: 'power1.inOut' },
+        // calage sur la carte la plus proche à la souris seulement : au doigt, la page ne doit jamais bouger toute seule
+        snap: finePointer ? { snapTo, duration: { min: 0.2, max: 0.6 }, delay: 0.08, ease: 'power1.inOut' } : false,
       },
     });
     gsap.fromTo('.timeline__line span', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.timeline', start: 'center center', end: () => '+=' + dist(), scrub: true, invalidateOnRefresh: true } });
@@ -423,15 +430,15 @@
     pv.poster = t.dataset.poster || '';
     pv.src = t.dataset.video;
     player.showModal();
-    lenis && lenis.stop();
+    lock(true);
     pv.play().catch(() => {});
   });
-  player.addEventListener('close', () => { pv.pause(); pv.removeAttribute('src'); pv.load(); lenis && lenis.start(); });
+  player.addEventListener('close', () => { pv.pause(); pv.removeAttribute('src'); pv.load(); lock(false); });
   const call = $('#call');
   document.addEventListener('click', (e) => {
-    if (e.target.closest('[data-open="call"]')) { call.showModal(); lenis && lenis.stop(); }
+    if (e.target.closest('[data-open="call"]')) { call.showModal(); lock(true); }
   });
-  call.addEventListener('close', () => lenis && lenis.start());
+  call.addEventListener('close', () => lock(false));
   [player, call].forEach((d) => d.addEventListener('click', (e) => { if (e.target === d) d.close(); }));
 
   // ---------- Boulangeries : carte et fiches liées ----------
