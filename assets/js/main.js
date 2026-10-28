@@ -6,18 +6,18 @@
   const $ = (s, r = document) => r.querySelector(s);
   const $$ = (s, r = document) => [...r.querySelectorAll(s)];
 
-  gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
+  gsap.registerPlugin(ScrollTrigger, SplitText);
   window.LPDS_READY = true;
 
   // ---------- Hauteur d'écran ----------
   // mesurée une seule fois (script du <head>, variable --vh) : la barre d'adresse du téléphone qui apparaît ou
   // disparaît ne fait plus bouger la page. On ne recalcule que si la largeur change (rotation de l'écran).
   let VH = parseFloat(document.documentElement.style.getPropertyValue('--vh')) * 100 || innerHeight;
-  let VW = innerWidth;
+  let VW = document.documentElement.clientWidth; // largeur de l'écran, même si un élément dépasse
   ScrollTrigger.config({ ignoreMobileResize: true, autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load' });
   addEventListener('resize', () => {
-    if (innerWidth === VW) return; // seule la hauteur a changé : on ne touche à rien
-    VW = innerWidth;
+    if (document.documentElement.clientWidth === VW) return; // seule la hauteur a changé : on ne touche à rien
+    VW = document.documentElement.clientWidth;
     VH = innerHeight;
     document.documentElement.style.setProperty('--vh', VH / 100 + 'px');
     ScrollTrigger.refresh();
@@ -193,7 +193,7 @@
   const mm = gsap.matchMedia();
   mm.add('(prefers-reduced-motion: no-preference)', () => {
     const track = $('.timeline__track');
-    const dist = () => track.scrollWidth - innerWidth;
+    const dist = () => track.scrollWidth - document.documentElement.clientWidth;
     const cardsTl = $$('.milestone');
     // quand on s'arrête de défiler, la frise se cale sur la carte la plus proche
     const snapTo = (v) => {
@@ -329,16 +329,27 @@
   const more = $('.gallery__more');
   let expanded = false, filter = 'all';
   function relayout(change) {
-    const state = Flip.getState(cards);
-    change();
-    gallery.classList.toggle('is-collapsed', filter === 'all' && !expanded);
-    more.hidden = !(filter === 'all' && !expanded);
-    if (reduce) return ScrollTrigger.refresh();
-    Flip.from(state, {
-      duration: 0.9, ease: 'expo.inOut', absolute: true, scale: true,
-      onEnter: (els) => gsap.fromTo(els, { opacity: 0, scale: 0.85 }, { opacity: 1, scale: 1, y: 0, duration: 0.7, ease: 'expo.out' }),
-      onLeave: (els) => gsap.to(els, { opacity: 0, scale: 0.85, duration: 0.4 }),
-      onComplete: () => ScrollTrigger.refresh(),
+    // une carte masquée garde le décalage de son animation de sortie : on l'efface, sinon elle revient au mauvais endroit
+    const apply = () => {
+      change();
+      gallery.classList.toggle('is-collapsed', filter === 'all' && !expanded);
+      more.hidden = !(filter === 'all' && !expanded);
+    };
+    if (reduce) { apply(); return ScrollTrigger.refresh(); }
+    // fondu : les photos s'effacent, la galerie se réorganise, puis elles réapparaissent pendant qu'elle prend
+    // sa nouvelle hauteur en douceur. Aucune photo ne sort de la grille : rien ne se chevauche, la page ne saute pas.
+    const before = gallery.offsetHeight;
+    gsap.to(cards, {
+      opacity: 0, duration: 0.2, ease: 'power1.in', overwrite: true,
+      onComplete: () => {
+        apply();
+        gsap.set(gallery, { overflow: 'hidden' });
+        gsap.fromTo(gallery, { height: before }, {
+          height: gallery.offsetHeight, duration: 0.7, ease: 'expo.inOut', overwrite: true,
+          onComplete: () => { gsap.set(gallery, { clearProps: 'height,overflow' }); ScrollTrigger.refresh(); },
+        });
+        gsap.fromTo(cards.filter((c) => c.offsetParent), { opacity: 0, y: 28 }, { opacity: 1, y: 0, duration: 0.7, ease: 'expo.out', stagger: 0.05 });
+      },
     });
   }
   chips.forEach((chip) => chip.addEventListener('click', () => relayout(() => {
