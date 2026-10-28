@@ -311,7 +311,9 @@
   ScrollTrigger.addEventListener('refresh', updateArrows); // largeur changée ou galerie ouverte
   updateArrows();
   if (!reduce) {
-    gsap.from('.tlo__item', { x: 120, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: 0.08, scrollTrigger: { trigger: strip, start: 'top 85%', once: true } });
+    // on anime le cadre, pas les cartes : des cartes qui bougent dans une bande aimantée (scroll-snap)
+    // la font se recaler sans arrêt sur iPhone, et elle vibre
+    gsap.from('.tlo__viewport', { y: 60, opacity: 0, duration: 1.2, ease: 'expo.out', scrollTrigger: { trigger: strip, start: 'top 85%', once: true } });
   }
 
   const cards = $$('.card');
