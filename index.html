@@ -1,0 +1,609 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Les Pains du Soleil | Boulangerie artisanale autour de Perpignan</title>
+<meta name="description" content="Maître artisan boulanger : pains au levain, viennoiseries, pâtisseries et trompe-l'œil faits maison. 4 boulangeries autour de Perpignan, ouvertes 7j/7.">
+<!-- Maquette de démonstration : retirer noindex à la mise en ligne définitive -->
+<meta name="robots" content="noindex, nofollow">
+<meta name="theme-color" content="#0b1426">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Les Pains du Soleil | l'Artisan de vos Envies">
+<meta property="og:description" content="Pains au levain, viennoiseries et pâtisseries faits maison. 4 boulangeries autour de Perpignan, ouvertes 7j/7.">
+<meta property="og:image" content="og-image.jpg">
+<meta property="og:locale" content="fr_FR">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/bodoni-moda-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/manrope-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css">
+<script>
+  document.documentElement.classList.add('js');
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('motion');
+  // filet de sécurité : si les scripts ne démarrent pas, on affiche le site sans animations
+  setTimeout(function () { if (!window.LPDS_READY) document.documentElement.classList.remove('motion', 'js'); }, 5000);
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "#marque",
+      "name": "Les Pains du Soleil",
+      "slogan": "l'Artisan de vos Envies",
+      "logo": "apple-touch-icon.png",
+      "email": "raphael@lespainsdusoleil.com",
+      "founder": { "@type": "Person", "name": "Raphaël Bonneau" },
+      "sameAs": ["https://www.instagram.com/lespainsdusoleil/", "https://www.facebook.com/lespainsdusoleilmaitreartisan/"]
+    },
+    {
+      "@type": "Bakery",
+      "name": "Les Pains du Soleil Saint-Estève",
+      "parentOrganization": { "@id": "#marque" },
+      "image": "assets/img/boutique-saint-esteve-1400.webp",
+      "telephone": "+33468632671",
+      "address": { "@type": "PostalAddress", "streetAddress": "46 avenue de Rivesaltes", "postalCode": "66240", "addressLocality": "Saint-Estève", "addressCountry": "FR" },
+      "geo": { "@type": "GeoCoordinates", "latitude": 42.7171732, "longitude": 2.8458961 },
+      "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "06:30", "closes": "20:00" }]
+    },
+    {
+      "@type": "Bakery",
+      "name": "Les Pains du Soleil Halles Vauban",
+      "parentOrganization": { "@id": "#marque" },
+      "image": "assets/img/boutique-halles-terrasse-1400.webp",
+      "telephone": "+33468349172",
+      "address": { "@type": "PostalAddress", "streetAddress": "Les Halles Vauban, 37 quai Sébastien Vauban", "postalCode": "66000", "addressLocality": "Perpignan", "addressCountry": "FR" },
+      "geo": { "@type": "GeoCoordinates", "latitude": 42.699719, "longitude": 2.8920674 },
+      "openingHoursSpecification": [
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "07:30", "closes": "20:00" },
+        { "@type": "OpeningHoursSpecification", "dayOfWeek": "Sunday", "opens": "08:00", "closes": "20:00" }
+      ]
+    },
+    {
+      "@type": "Bakery",
+      "name": "Les Pains du Soleil Cabestany",
+      "parentOrganization": { "@id": "#marque" },
+      "image": "assets/img/boutique-cabestany-1400.webp",
+      "telephone": "+33468838276",
+      "address": { "@type": "PostalAddress", "streetAddress": "1 rue Ambroise Croizat", "postalCode": "66330", "addressLocality": "Cabestany", "addressCountry": "FR" },
+      "geo": { "@type": "GeoCoordinates", "latitude": 42.6939576, "longitude": 2.9317966 },
+      "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "06:30", "closes": "20:00" }]
+    },
+    {
+      "@type": "Bakery",
+      "name": "Les Pains du Soleil Sainte-Marie-la-Mer",
+      "parentOrganization": { "@id": "#marque" },
+      "image": "assets/img/boutique-sainte-marie-1400.webp",
+      "telephone": "+33468097940",
+      "address": { "@type": "PostalAddress", "streetAddress": "1 rue de la Liberté", "postalCode": "66470", "addressLocality": "Sainte-Marie-la-Mer", "addressCountry": "FR" },
+      "geo": { "@type": "GeoCoordinates", "latitude": 42.7291072, "longitude": 3.0212634 },
+      "openingHoursSpecification": [{ "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"], "opens": "06:30", "closes": "20:00" }]
+    }
+  ]
+}
+</script>
+</head>
+<body class="is-loading">
+<a class="skip" href="#contenu" data-i18n="skip">Aller au contenu</a>
+
+<!-- Écran d'ouverture -->
+<div class="loader" aria-hidden="true">
+  <div class="loader__inner">
+    <svg class="loader__ring" viewBox="0 0 200 200"><circle cx="100" cy="100" r="92"/></svg>
+    <img class="loader__sun" src="assets/img/soleil-600.webp" alt="" width="300" height="300">
+  </div>
+  <p class="loader__word"><span>Les</span> <span>Pains</span> <span>du</span> <span>Soleil</span></p>
+</div>
+
+<div class="cursor" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<header class="nav" id="nav">
+  <a class="nav__brand" href="#top" aria-label="Les Pains du Soleil, accueil">
+    <span class="emblem"><img src="assets/img/soleil-600.webp" alt="" width="40" height="40"></span>
+    <span class="nav__word">Les Pains <em>du</em> Soleil</span>
+  </a>
+  <nav class="nav__links" aria-label="Navigation principale">
+    <a href="#histoire" data-i18n="nav.histoire">Histoire</a>
+    <a href="#fournil" data-i18n="nav.fournil">Fournil</a>
+    <a href="#creations" data-i18n="nav.creations">Créations</a>
+    <a href="#brunch" data-i18n="nav.brunch">Brunch</a>
+    <a href="#presse" data-i18n="nav.presse">Presse</a>
+  </nav>
+  <div class="nav__right">
+    <div class="lang" role="group" aria-label="Langue">
+      <button type="button" data-lang="fr" aria-pressed="true">FR</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="es" aria-pressed="false">ES</button>
+    </div>
+    <a class="btn btn--gold btn--sm magnetic" href="#boulangeries" data-i18n="cta.boulangeries">Nos boulangeries</a>
+    <button class="burger" type="button" aria-expanded="false" aria-controls="menu" data-i18n-attr="aria-label:menu.open" aria-label="Ouvrir le menu"><span></span><span></span></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <nav class="menu__links" aria-label="Menu">
+    <a href="#histoire" data-i18n="nav.histoire">Histoire</a>
+    <a href="#fournil" data-i18n="nav.fournil">Fournil</a>
+    <a href="#creations" data-i18n="nav.creations">Créations</a>
+    <a href="#brunch" data-i18n="nav.brunch">Brunch</a>
+    <a href="#presse" data-i18n="nav.presse">Presse</a>
+    <a href="#boulangeries" data-i18n="cta.boulangeries">Nos boulangeries</a>
+  </nav>
+  <div class="lang lang--menu" role="group" aria-label="Langue">
+    <button type="button" data-lang="fr" aria-pressed="true">Français</button>
+    <button type="button" data-lang="en" aria-pressed="false">English</button>
+    <button type="button" data-lang="es" aria-pressed="false">Español</button>
+  </div>
+</div>
+
+<main id="contenu">
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero__media">
+    <div class="triptych" aria-hidden="true">
+      <div class="triptych__panel"><video muted loop playsinline preload="none" poster="assets/video/hero-a.jpg" data-src="assets/video/hero-a.mp4"></video></div>
+      <div class="triptych__panel"><video class="hero__sound-source" muted loop playsinline preload="none" poster="assets/video/hero-c.jpg" data-src="assets/video/hero-c.mp4"></video></div>
+      <div class="triptych__panel"><video muted loop playsinline preload="none" poster="assets/video/hero-b.jpg" data-src="assets/video/hero-b.mp4"></video></div>
+    </div>
+    <video class="hero__mobile hero__sound-source" muted loop playsinline preload="none" poster="assets/video/hero-mobile.jpg" data-src="assets/video/hero-mobile.mp4" aria-hidden="true"></video>
+    <div class="hero__veil"></div>
+  </div>
+  <div class="hero__content">
+    <p class="eyebrow" data-i18n="hero.eyebrow">Maître Artisan Boulanger</p>
+    <h1 class="hero__title" data-i18n="hero.title">L'Artisan de vos <em>Envies</em></h1>
+    <p class="hero__sub" data-i18n="hero.sub">Pains au levain, viennoiseries et pâtisseries faits maison chaque jour. Quatre boulangeries autour de Perpignan, ouvertes 7j/7.</p>
+    <div class="hero__ctas">
+      <a class="btn btn--gold magnetic" href="#boulangeries" data-i18n="cta.boulangeries">Nos boulangeries</a>
+      <button class="btn btn--ghost magnetic" type="button" data-open="call" data-i18n="cta.appeler">Appeler</button>
+    </div>
+  </div>
+  <button class="sound" type="button" aria-pressed="false" data-i18n-attr="aria-label:hero.son" aria-label="Activer le son de la vidéo">
+    <svg class="sound__off" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16 9l5 6M21 9l-5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <svg class="sound__on" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9v6h4l5 4V5L8 9H4z"/><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    <span class="sound__bars" aria-hidden="true"><i></i><i></i><i></i></span>
+  </button>
+</section>
+
+<!-- CHIFFRES -->
+<section class="stats" aria-label="En quelques chiffres" data-i18n-attr="aria-label:stats.label">
+  <div class="stats__grid">
+    <div class="stat" data-reveal="up">
+      <p class="stat__num"><span data-count="4">4</span></p>
+      <p class="stat__label" data-i18n="stats.1">boulangeries autour de Perpignan</p>
+    </div>
+    <div class="stat" data-reveal="up">
+      <p class="stat__num"><span data-count="7">7</span><small>j/7</small></p>
+      <p class="stat__label" data-i18n="stats.2">ouvertes tous les jours, dimanche compris</p>
+    </div>
+    <div class="stat" data-reveal="up">
+      <p class="stat__num"><small>+</small><span data-count="20">20</span></p>
+      <p class="stat__label" data-i18n="stats.3">variétés de pains au levain naturel</p>
+    </div>
+    <div class="stat" data-reveal="up">
+      <p class="stat__num"><span data-count="100">100</span><small>%</small></p>
+      <p class="stat__label" data-i18n="stats.4">farines françaises</p>
+    </div>
+  </div>
+  <p class="stats__ribbon" data-reveal="up">
+    <span class="tv">M6</span>
+    <span data-i18n="stats.ribbon">Vainqueur de son duel dans « La Meilleure Boulangerie de France »</span>
+  </p>
+</section>
+
+<!-- MANIFESTE + SOLEIL 3D -->
+<section class="manifesto" aria-labelledby="manifesto-title">
+  <div class="manifesto__stage">
+    <canvas class="sun3d" aria-hidden="true"></canvas>
+    <img class="sun-fallback" src="assets/img/soleil-600.webp" alt="" width="600" height="600" aria-hidden="true">
+    <div class="manifesto__text">
+      <h2 class="visually-hidden" id="manifesto-title" data-i18n="manifesto.title">Notre manière de faire</h2>
+      <p class="manifesto__words" data-i18n="manifesto.text">Pendant que la ville dort, nos boulangers pétrissent, façonnent et enfournent. Au lever du soleil, tout est prêt. Fait maison, chaque jour.</p>
+    </div>
+  </div>
+</section>
+
+<!-- HISTOIRE -->
+<section class="story" id="histoire" aria-labelledby="story-title">
+  <div class="story__intro">
+    <figure class="story__portrait" data-reveal="img">
+      <img src="assets/img/histoire-m6-tournage-700.webp" srcset="assets/img/histoire-m6-tournage-700.webp 700w, assets/img/histoire-m6-tournage-1400.webp 1080w" sizes="(min-width: 900px) 40vw, 92vw" alt="Raphaël Bonneau en tenue de boulanger, assis dans sa boulangerie" data-i18n-attr="alt:story.portraitAlt" loading="lazy" decoding="async" width="1080" height="1440">
+    </figure>
+    <div class="story__text">
+      <p class="eyebrow" data-i18n="story.eyebrow">Notre histoire</p>
+      <h2 class="h2" id="story-title" data-reveal="split" data-i18n="story.title">Fils de boulanger, patron à 21 ans</h2>
+      <p class="lead" data-reveal="up" data-i18n="story.p1">Raphaël Bonneau a grandi dans la boulangerie de son père, Jérôme, maître artisan boulanger. C'est lui qui a créé Les Pains du Soleil, et qui lui a tout appris.</p>
+      <blockquote class="quote" data-reveal="up">
+        <p data-i18n="story.quote">« Quand je n'étais pas à l'école, ma garderie, c'était la boulangerie. »</p>
+        <cite data-i18n="story.quoteCite">Raphaël Bonneau, sur France 3 Occitanie</cite>
+      </blockquote>
+      <p data-reveal="up" data-i18n="story.p2">À 21 ans, encore en master, il choisit d'ouvrir sa propre boulangerie. Cinq banques refusent de le suivre. Il insiste, et ouvre Saint-Estève en 2024. Deux ans plus tard, ils sont quatre.</p>
+      <button class="btn btn--ghost magnetic" type="button" data-video="assets/video/histoire.mp4" data-poster="assets/video/histoire.jpg" data-reveal="up">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+        <span data-i18n="story.video">Son histoire en vidéo</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="timeline">
+    <div class="timeline__track">
+      <div class="timeline__line" aria-hidden="true"><span></span></div>
+      <article class="milestone">
+        <p class="milestone__year">2012</p>
+        <figure class="milestone__img"><img src="assets/img/fournil-baguettes-700.webp" alt="Mains d'un boulanger sortant des baguettes du four" data-i18n-attr="alt:tl.1.alt" loading="lazy" decoding="async" width="700" height="875"></figure>
+        <h3 data-i18n="tl.1.title">Tout commence à Cabestany</h3>
+        <p data-i18n="tl.1.text">Jérôme Bonneau, maître artisan boulanger, crée Les Pains du Soleil.</p>
+      </article>
+      <article class="milestone">
+        <p class="milestone__year">2024</p>
+        <figure class="milestone__img"><img src="assets/img/boutique-saint-esteve-700.webp" alt="Chaises en rotin dans la boulangerie de Saint-Estève" data-i18n-attr="alt:tl.2.alt" loading="lazy" decoding="async" width="700" height="700"></figure>
+        <h3 data-i18n="tl.2.title">Saint-Estève</h3>
+        <p data-i18n="tl.2.text">Raphaël ouvre sa première boulangerie à 21 ans, encore étudiant.</p>
+      </article>
+      <article class="milestone">
+        <p class="milestone__year">2025</p>
+        <figure class="milestone__img"><img src="assets/img/boutique-halles-700.webp" alt="La boutique des Halles Vauban, murs rayés et banquette jaune" data-i18n-attr="alt:tl.3.alt" loading="lazy" decoding="async" width="700" height="875"></figure>
+        <h3 data-i18n="tl.3.title">Les Halles Vauban</h3>
+        <p data-i18n="tl.3.text">Une deuxième adresse en plein cœur de Perpignan, pensée comme une bulle de soleil.</p>
+      </article>
+      <article class="milestone">
+        <p class="milestone__year">2026</p>
+        <figure class="milestone__img"><img src="assets/img/histoire-m6-equipe-700.webp" alt="Tournage de La Meilleure Boulangerie de France devant la boulangerie" data-i18n-attr="alt:tl.4.alt" loading="lazy" decoding="async" width="700" height="933"></figure>
+        <h3 data-i18n="tl.4.title">À la télé, sur M6</h3>
+        <p data-i18n="tl.4.text">« La Meilleure Boulangerie de France » : l'équipe remporte son duel et représente les Pyrénées-Orientales.</p>
+      </article>
+      <article class="milestone">
+        <p class="milestone__year" data-i18n="tl.5.year">Août 2026</p>
+        <figure class="milestone__img"><img src="assets/img/boutique-cabestany-700.webp" alt="Enseigne Les Pains du Soleil, Maître Artisan Boulanger, à Cabestany" data-i18n-attr="alt:tl.5.alt" loading="lazy" decoding="async" width="700" height="929"></figure>
+        <h3 data-i18n="tl.5.title">Cabestany, rafraîchie</h3>
+        <p data-i18n="tl.5.text">La boulangerie familiale rouvre ses portes après un coup de neuf.</p>
+      </article>
+      <article class="milestone">
+        <p class="milestone__year" data-i18n="tl.6.year">Oct. 2026</p>
+        <figure class="milestone__img"><img src="assets/img/boutique-sainte-marie-700.webp" alt="Intérieur de la boulangerie de Sainte-Marie-la-Mer" data-i18n-attr="alt:tl.6.alt" loading="lazy" decoding="async" width="700" height="933"></figure>
+        <h3 data-i18n="tl.6.title">Sainte-Marie-la-Mer</h3>
+        <p data-i18n="tl.6.text">La quatrième boulangerie ouvre en bord de mer, le jour des 24 ans de Raphaël.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- FOURNIL -->
+<section class="fournil" id="fournil" aria-labelledby="fournil-title">
+  <div class="fournil__pin">
+    <div class="fournil__steps">
+      <h2 class="h2" id="fournil-title" data-i18n="fournil.title">Le fournil, <em>la nuit</em></h2>
+      <div class="step is-active">
+        <h3 data-i18n="fournil.s1.title">Le levain naturel</h3>
+        <p data-i18n="fournil.s1.text">Nos pains lèvent lentement, au levain naturel. Le temps fait le goût, la croûte et la mie.</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="fournil.s2.title">Plus de 20 pains</h3>
+        <p data-i18n="fournil.s2.text">Dont le Soleillou, notre pain signature : croustillant à l'extérieur, moelleux à l'intérieur. Et la Midinette, notre baguette tradition.</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="fournil.s3.title">Des farines 100 % françaises</h3>
+        <p data-i18n="fournil.s3.text">Et des produits de chez nous, choisis auprès de producteurs du pays catalan.</p>
+      </div>
+      <div class="step">
+        <h3 data-i18n="fournil.s4.title">Fait main, chaque jour</h3>
+        <p data-i18n="fournil.s4.text">Pains, viennoiseries, pâtisseries : tout est façonné à la main par nos équipes, avant l'ouverture.</p>
+      </div>
+    </div>
+    <div class="fournil__screen">
+      <canvas class="fournil__canvas" width="540" height="960" aria-hidden="true"></canvas>
+      <img class="fournil__poster" src="assets/img/fournil-seq/f001.webp" alt="Vitrines de pains et viennoiseries éclairées avant l'ouverture" data-i18n-attr="alt:fournil.alt" width="540" height="960" loading="lazy">
+    </div>
+  </div>
+  <div class="gestures">
+    <figure data-speed="-0.06"><img src="assets/img/fournil-faconnage-700.webp" alt="Façonnage de la pâte sur le plan de travail fariné" data-i18n-attr="alt:gest.1" loading="lazy" decoding="async" width="700" height="875"></figure>
+    <figure data-speed="0.08"><img src="assets/img/fournil-farine-700.webp" alt="Farine tamisée au-dessus des pâtons" data-i18n-attr="alt:gest.2" loading="lazy" decoding="async" width="700" height="857"></figure>
+    <figure data-speed="-0.12"><img src="assets/img/fournil-grignes-700.webp" alt="Grigne des pains avant la cuisson" data-i18n-attr="alt:gest.3" loading="lazy" decoding="async" width="700" height="857"></figure>
+    <figure data-speed="0.05"><img src="assets/img/fournil-couches-700.webp" alt="Pâtons au repos dans les couches de lin" data-i18n-attr="alt:gest.4" loading="lazy" decoding="async" width="700" height="857"></figure>
+  </div>
+</section>
+
+<!-- CRÉATIONS -->
+<section class="creations" id="creations" aria-labelledby="creations-title">
+  <header class="section-head">
+    <h2 class="h2" id="creations-title" data-reveal="split" data-i18n="crea.title">Nos créations</h2>
+    <p class="lead" data-reveal="up" data-i18n="crea.sub">Tout est fait maison. Voici un aperçu de ce qui vous attend en vitrine, selon les jours et les saisons.</p>
+  </header>
+
+  <div class="tlo">
+    <div class="tlo__head">
+      <h3 class="h3" data-i18n="crea.tlo.title">Les trompe-l'œil</h3>
+      <p data-i18n="crea.tlo.text">Le week-end, en quantité limitée. On croit voir un fruit, on découvre une pâtisserie.</p>
+    </div>
+    <div class="tlo__strip" tabindex="0" data-i18n-attr="aria-label:crea.tlo.strip" aria-label="Trompe-l'œil, faire défiler">
+      <figure class="tlo__item"><img src="assets/img/tlo-mangue-700.webp" alt="Trompe-l'œil mangue" data-i18n-attr="alt:tlo.mangue" loading="lazy" decoding="async" width="700" height="415"><figcaption data-i18n="tlo.mangue">La Mangue</figcaption></figure>
+      <figure class="tlo__item"><img src="assets/img/tlo-pecan-700.webp" alt="Trompe-l'œil noix de pécan" data-i18n-attr="alt:tlo.pecan" loading="lazy" decoding="async" width="700" height="415"><figcaption data-i18n="tlo.pecan">La Noix de pécan</figcaption></figure>
+      <figure class="tlo__item"><img src="assets/img/tlo-passion-700.webp" alt="Trompe-l'œil fruit de la passion" data-i18n-attr="alt:tlo.passion" loading="lazy" decoding="async" width="700" height="415"><figcaption data-i18n="tlo.passion">Le Fruit de la passion</figcaption></figure>
+      <figure class="tlo__item"><img src="assets/img/tlo-cacao-700.webp" alt="Trompe-l'œil cabosse de cacao" data-i18n-attr="alt:tlo.cacao" loading="lazy" decoding="async" width="700" height="415"><figcaption data-i18n="tlo.cacao">Le Cacao</figcaption></figure>
+      <figure class="tlo__item"><img src="assets/img/tlo-cacahuete-700.webp" alt="Trompe-l'œil cacahuète" data-i18n-attr="alt:tlo.cacahuete" loading="lazy" decoding="async" width="700" height="415"><figcaption data-i18n="tlo.cacahuete">La Cacahuète</figcaption></figure>
+      <figure class="tlo__item"><img src="assets/img/tlo-vanille-700.webp" alt="Trompe-l'œil gousse de vanille" data-i18n-attr="alt:tlo.vanille" loading="lazy" decoding="async" width="700" height="415"><figcaption data-i18n="tlo.vanille">La Vanille</figcaption></figure>
+      <figure class="tlo__item"><img src="assets/img/tlo-pistache-700.webp" alt="Trompe-l'œil pistache" data-i18n-attr="alt:tlo.pistache" loading="lazy" decoding="async" width="700" height="415"><figcaption data-i18n="tlo.pistache">La Pistache</figcaption></figure>
+    </div>
+  </div>
+
+  <div class="filters" role="group" aria-label="Filtrer les créations" data-i18n-attr="aria-label:crea.filter">
+    <button type="button" class="chip is-on" data-filter="all" aria-pressed="true" data-i18n="crea.f.all">Tout</button>
+    <button type="button" class="chip" data-filter="pains" aria-pressed="false" data-i18n="crea.f.pains">Pains</button>
+    <button type="button" class="chip" data-filter="viennoiseries" aria-pressed="false" data-i18n="crea.f.vien">Viennoiseries</button>
+    <button type="button" class="chip" data-filter="patisseries" aria-pressed="false" data-i18n="crea.f.pat">Pâtisseries</button>
+    <button type="button" class="chip" data-filter="gourmandises" aria-pressed="false" data-i18n="crea.f.gour">Gourmandises</button>
+    <button type="button" class="chip" data-filter="fetes" aria-pressed="false" data-i18n="crea.f.fetes">Fêtes</button>
+  </div>
+
+  <div class="gallery">
+    <figure class="card card--tall" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-cafes-700.webp" srcset="assets/img/pat-cafes-700.webp 700w, assets/img/pat-cafes-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Soleil Exotique, Saint-Honoré et Paris-Brest servis avec des cafés" data-i18n-attr="alt:g.cafes" loading="lazy" decoding="async" width="700" height="932"></div><figcaption data-i18n="g.cafes">Soleil Exotique, Saint-Honoré et Paris-Brest</figcaption></figure>
+    <figure class="card" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-croissant-framboise-700.webp" srcset="assets/img/vien-croissant-framboise-700.webp 700w, assets/img/vien-croissant-framboise-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Croissant framboise tenu à la main" data-i18n-attr="alt:g.framboise" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.framboise">Croissant framboise</figcaption></figure>
+    <figure class="card" data-cat="pains"><div class="card__img"><img src="assets/img/pain-soleillou-700.webp" srcset="assets/img/pain-soleillou-700.webp 700w, assets/img/pain-soleillou-1400.webp 1079w" sizes="(min-width: 900px) 33vw, 50vw" alt="Étagère de pains au levain, dont le Soleillou" data-i18n-attr="alt:g.soleillou" loading="lazy" decoding="async" width="700" height="867"></div><figcaption data-i18n="g.soleillou">Le Soleillou et nos pains au levain</figcaption></figure>
+    <figure class="card card--wide" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-croissant-framboise-coupe-700.webp" srcset="assets/img/vien-croissant-framboise-coupe-700.webp 700w, assets/img/vien-croissant-framboise-coupe-1400.webp 1400w" sizes="(min-width: 900px) 66vw, 100vw" alt="Croissant fourré à la framboise coupé en deux" data-i18n-attr="alt:g.fourre" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.fourre">Croissant fourré framboise</figcaption></figure>
+    <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-paris-brest-700.webp" srcset="assets/img/pat-paris-brest-700.webp 700w, assets/img/pat-paris-brest-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Paris-Brest aux éclats de noisette" data-i18n-attr="alt:g.parisbrest" loading="lazy" decoding="async" width="700" height="928"></div><figcaption>Paris-Brest</figcaption></figure>
+    <figure class="card" data-cat="pains"><div class="card__img"><img src="assets/img/pain-mie-700.webp" srcset="assets/img/pain-mie-700.webp 700w, assets/img/pain-mie-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Mie alvéolée d'un pain au levain" data-i18n-attr="alt:g.mie" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.mie">La mie d'un pain au levain</figcaption></figure>
+    <figure class="card card--tall" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-bicolore-700.webp" srcset="assets/img/vien-bicolore-700.webp 700w, assets/img/vien-bicolore-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Viennoiserie bicolore tenue à la main" data-i18n-attr="alt:g.bicolore" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.bicolore">Viennoiseries bicolores</figcaption></figure>
+    <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-intense-700.webp" srcset="assets/img/pat-intense-700.webp 700w, assets/img/pat-intense-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Les pâtisseries L'Intense, Rouge éclat et Soleil Exotique" data-i18n-attr="alt:g.trio" loading="lazy" decoding="async" width="700" height="928"></div><figcaption data-i18n="g.trio">L'Intense, Rouge éclat et Soleil Exotique</figcaption></figure>
+    <figure class="card" data-cat="gourmandises"><div class="card__img"><img src="assets/img/gour-cookie-framboise-700.webp" srcset="assets/img/gour-cookie-framboise-700.webp 700w, assets/img/gour-cookie-framboise-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Cookie gourmand garni de fruits rouges" data-i18n-attr="alt:g.cookie" loading="lazy" decoding="async" width="700" height="933"></div><figcaption data-i18n="g.cookie">Cookies gourmands</figcaption></figure>
+    <figure class="card" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-pain-praline-700.webp" srcset="assets/img/vien-pain-praline-700.webp 700w, assets/img/vien-pain-praline-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Pain au chocolat praliné" data-i18n-attr="alt:g.praline" loading="lazy" decoding="async" width="700" height="874"></div><figcaption data-i18n="g.praline">Pain au chocolat praliné</figcaption></figure>
+    <figure class="card card--wide" data-cat="pains"><div class="card__img"><img src="assets/img/pain-four-700.webp" srcset="assets/img/pain-four-700.webp 700w, assets/img/pain-four-1400.webp 1080w" sizes="(min-width: 900px) 66vw, 100vw" alt="Chariots de pains tout juste sortis du four" data-i18n-attr="alt:g.four" loading="lazy" decoding="async" width="700" height="857"></div><figcaption data-i18n="g.four">Tout juste sortis du four</figcaption></figure>
+    <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-trio-700.webp" srcset="assets/img/pat-trio-700.webp 700w, assets/img/pat-trio-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Pâtisserie Soleil Exotique" data-i18n-attr="alt:g.exotique" loading="lazy" decoding="async" width="700" height="932"></div><figcaption>Soleil Exotique</figcaption></figure>
+    <figure class="card" data-cat="gourmandises"><div class="card__img"><img src="assets/img/gour-tablettes-700.webp" srcset="assets/img/gour-tablettes-700.webp 700w, assets/img/gour-tablettes-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Tablettes de chocolat Dubaï, Spéculoos et Mangue-Passion" data-i18n-attr="alt:g.tablettes" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.tablettes">Tablettes Dubaï, Spéculoos et Mangue-Passion</figcaption></figure>
+    <figure class="card card--tall" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-croissant-pistache-700.webp" srcset="assets/img/vien-croissant-pistache-700.webp 700w, assets/img/vien-croissant-pistache-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Croissant bicolore à la pistache coupé" data-i18n-attr="alt:g.pistache" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.pistache">Croissant bicolore pistache</figcaption></figure>
+    <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-eclairs-700.webp" srcset="assets/img/pat-eclairs-700.webp 700w, assets/img/pat-eclairs-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Éclairs garnis de crème" data-i18n-attr="alt:g.eclairs" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.eclairs">Éclairs</figcaption></figure>
+    <figure class="card" data-cat="pains"><div class="card__img"><img src="assets/img/pain-baguettes-700.webp" srcset="assets/img/pain-baguettes-700.webp 700w, assets/img/pain-baguettes-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Baguettes dorées alignées" data-i18n-attr="alt:g.baguettes" loading="lazy" decoding="async" width="700" height="928"></div><figcaption data-i18n="g.baguettes">Baguettes</figcaption></figure>
+    <figure class="card" data-cat="fetes"><div class="card__img"><img src="assets/img/fete-buche-700.webp" srcset="assets/img/fete-buche-700.webp 700w, assets/img/fete-buche-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Bûche de Noël au chocolat" data-i18n-attr="alt:g.buche" loading="lazy" decoding="async" width="700" height="857"></div><figcaption data-i18n="g.buche">Bûches de Noël</figcaption></figure>
+    <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-coeur-framboise-700.webp" srcset="assets/img/pat-coeur-framboise-700.webp 700w, assets/img/pat-coeur-framboise-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Panier framboises et pistaches" data-i18n-attr="alt:g.panier" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.panier">Panier framboises et pistaches</figcaption></figure>
+    <figure class="card" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-cinnamon-roll-700.webp" srcset="assets/img/vien-cinnamon-roll-700.webp 700w, assets/img/vien-cinnamon-roll-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Cinnamon roll et matcha" data-i18n-attr="alt:g.cinnamon" loading="lazy" decoding="async" width="700" height="933"></div><figcaption>Cinnamon roll</figcaption></figure>
+    <figure class="card" data-cat="gourmandises"><div class="card__img"><img src="assets/img/gour-macarons-700.webp" srcset="assets/img/gour-macarons-700.webp 700w, assets/img/gour-macarons-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Tour de macarons colorés" data-i18n-attr="alt:g.macarons" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.macarons">Macarons</figcaption></figure>
+    <figure class="card card--wide" data-cat="fetes"><div class="card__img"><img src="assets/img/fete-plateau-700.webp" srcset="assets/img/fete-plateau-700.webp 700w, assets/img/fete-plateau-1400.webp 1080w" sizes="(min-width: 900px) 66vw, 100vw" alt="Plateau sucré des fêtes" data-i18n-attr="alt:g.plateau" loading="lazy" decoding="async" width="700" height="857"></div><figcaption data-i18n="g.plateau">Plateaux des fêtes, sur commande en boutique</figcaption></figure>
+    <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-exotique-700.webp" srcset="assets/img/pat-exotique-700.webp 700w, assets/img/pat-exotique-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Pâtisserie L'Intense au chocolat" data-i18n-attr="alt:g.intense" loading="lazy" decoding="async" width="700" height="933"></div><figcaption>L'Intense</figcaption></figure>
+    <figure class="card" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-escargots-700.webp" srcset="assets/img/vien-escargots-700.webp 700w, assets/img/vien-escargots-1400.webp 1079w" sizes="(min-width: 900px) 33vw, 50vw" alt="Pains aux raisins dorés" data-i18n-attr="alt:g.raisins" loading="lazy" decoding="async" width="700" height="867"></div><figcaption data-i18n="g.raisins">Pains aux raisins</figcaption></figure>
+    <figure class="card" data-cat="pains"><div class="card__img"><img src="assets/img/pain-boules-700.webp" srcset="assets/img/pain-boules-700.webp 700w, assets/img/pain-boules-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Boules de pain au levain grignées" data-i18n-attr="alt:g.boules" loading="lazy" decoding="async" width="700" height="857"></div><figcaption data-i18n="g.boules">Pains au levain</figcaption></figure>
+    <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-tartelette-framboise-700.webp" srcset="assets/img/pat-tartelette-framboise-700.webp 700w, assets/img/pat-tartelette-framboise-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Tartelette aux framboises" data-i18n-attr="alt:g.tartelette" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.tartelette">Tartelette framboise</figcaption></figure>
+    <figure class="card" data-cat="fetes"><div class="card__img"><img src="assets/img/pat-roses-700.webp" srcset="assets/img/pat-roses-700.webp 700w, assets/img/pat-roses-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Pâtisseries en forme de roses pour la Saint-Valentin" data-i18n-attr="alt:g.roses" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.roses">Les roses de la Saint-Valentin</figcaption></figure>
+    <figure class="card" data-cat="gourmandises"><div class="card__img"><img src="assets/img/gour-cookie-noisette-700.webp" srcset="assets/img/gour-cookie-noisette-700.webp 700w, assets/img/gour-cookie-noisette-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Cookie aux noisettes et caramel" data-i18n-attr="alt:g.cookie2" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.cookie2">Cookies fourrés</figcaption></figure>
+  </div>
+</section>
+
+<!-- SNACKING & BRUNCH -->
+<section class="brunch" id="brunch" aria-labelledby="brunch-title">
+  <header class="section-head">
+    <h2 class="h2" id="brunch-title" data-reveal="split" data-i18n="brunch.title">Snacking <em>&amp;</em> brunch</h2>
+  </header>
+  <div class="bento">
+    <div class="bento__cell bento__video" data-reveal="img">
+      <video muted loop playsinline preload="none" poster="assets/video/snack-sandwich.jpg" data-src="assets/video/snack-sandwich.mp4" data-lazy aria-hidden="true"></video>
+    </div>
+    <div class="bento__cell bento__text">
+      <h3 class="h3" data-i18n="brunch.snack.title">Le midi, sur le pouce</h3>
+      <p data-i18n="brunch.snack.text">Sandwichs au pain au levain, Wrap Garden et Wrap Texas, Tuna Melt, croques, paninis, burgers, bowls et salades. Sur place, en terrasse ou à emporter.</p>
+    </div>
+    <figure class="bento__cell bento__img" data-reveal="img"><img src="assets/img/snack-wraps-700.webp" alt="Wraps et sandwichs au pain au levain" data-i18n-attr="alt:brunch.alt1" loading="lazy" decoding="async" width="700" height="873"></figure>
+    <figure class="bento__cell bento__img bento__img--tall" data-reveal="img"><img src="assets/img/snack-avocat-700.webp" srcset="assets/img/snack-avocat-700.webp 700w, assets/img/snack-avocat-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 100vw" alt="Tartine avocat et saumon" data-i18n-attr="alt:brunch.alt2" loading="lazy" decoding="async" width="700" height="875"></figure>
+    <div class="bento__cell bento__brunch">
+      <img src="assets/img/brunch-salle-700.webp" srcset="assets/img/brunch-salle-700.webp 700w, assets/img/brunch-salle-1400.webp 1400w" sizes="(min-width: 900px) 66vw, 100vw" alt="Salle de brunch avec l'enseigne Les Pains du Soleil, l'Artisan de vos Envies" data-i18n-attr="alt:brunch.alt3" loading="lazy" decoding="async" width="700" height="875">
+      <div class="bento__brunch-text">
+        <h3 class="h3" data-i18n="brunch.b.title">Le brunch</h3>
+        <p data-i18n="brunch.b.text">Aux Halles Vauban, du mardi au dimanche, toute la journée : avocado toast, egg toast, brioche perdue, pancakes maison. À Saint-Estève, un dimanche par mois.</p>
+        <a class="btn btn--gold btn--sm" href="sms:+33778102754" data-i18n="brunch.b.cta">Réserver par SMS</a>
+      </div>
+    </div>
+    <figure class="bento__cell bento__img" data-reveal="img"><img src="assets/img/brunch-pancakes-700.webp" alt="Pancakes maison aux fruits rouges et pistache" data-i18n-attr="alt:brunch.alt4" loading="lazy" decoding="async" width="700" height="875"></figure>
+    <div class="bento__cell bento__drinks">
+      <img src="assets/img/boisson-smoothies-700.webp" alt="Smoothies aux fruits" data-i18n-attr="alt:brunch.alt5" loading="lazy" decoding="async" width="700" height="933">
+      <div>
+        <h3 class="h3" data-i18n="brunch.d.title">Côté tasse</h3>
+        <p data-i18n="brunch.d.text">Café, matcha, smoothies et boissons gourmandes, chaudes ou glacées.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRESSE -->
+<section class="press" id="presse" aria-labelledby="press-title">
+  <header class="section-head section-head--center">
+    <p class="eyebrow" data-i18n="press.eyebrow">Vu à la télé, dans la presse</p>
+    <h2 class="h2" id="press-title" data-reveal="split" data-i18n="press.title">On parle de nous</h2>
+    <ul class="medias" aria-label="Médias">
+      <li>M6</li><li>France 3</li><li>ICI Roussillon</li><li>L'Indépendant</li><li>Sud Radio</li><li>actu.fr</li>
+    </ul>
+  </header>
+  <div class="reel" data-i18n-attr="aria-label:press.reel" aria-label="Vidéos télé et radio">
+    <div class="reel__track">
+      <button class="clip" type="button" data-video="assets/video/m6.mp4" data-poster="assets/video/m6.jpg">
+        <video muted loop playsinline preload="none" poster="assets/video/m6.jpg" data-src="assets/video/m6-apercu.mp4" aria-hidden="true"></video>
+        <span class="clip__meta"><strong>M6</strong><span data-i18n="press.m6">La Meilleure Boulangerie de France, mai 2026</span></span>
+      </button>
+      <button class="clip" type="button" data-video="assets/video/france3.mp4" data-poster="assets/video/france3.jpg">
+        <video muted loop playsinline preload="none" poster="assets/video/france3.jpg" data-src="assets/video/france3-apercu.mp4" aria-hidden="true"></video>
+        <span class="clip__meta"><strong>France 3 Occitanie</strong><span data-i18n="press.f3">Reportage, octobre 2025</span></span>
+      </button>
+      <button class="clip" type="button" data-video="assets/video/meteo.mp4" data-poster="assets/video/meteo.jpg">
+        <video muted loop playsinline preload="none" poster="assets/video/meteo.jpg" data-src="assets/video/meteo-apercu.mp4" aria-hidden="true"></video>
+        <span class="clip__meta"><strong>France 3</strong><span data-i18n="press.meteo">« Météo à la carte », octobre 2026</span></span>
+      </button>
+      <button class="clip" type="button" data-video="assets/video/ici.mp4" data-poster="assets/video/ici.jpg">
+        <video muted loop playsinline preload="none" poster="assets/video/ici.jpg" data-src="assets/video/ici-apercu.mp4" aria-hidden="true"></video>
+        <span class="clip__meta"><strong>ICI Roussillon</strong><span data-i18n="press.ici">Portrait, mai 2026</span></span>
+      </button>
+      <button class="clip" type="button" data-video="assets/video/artisan.mp4" data-poster="assets/video/artisan.jpg">
+        <video muted loop playsinline preload="none" poster="assets/video/artisan.jpg" data-src="assets/video/artisan-apercu.mp4" aria-hidden="true"></video>
+        <span class="clip__meta"><strong data-i18n="press.mda">Maison de l'Artisan</strong><span data-i18n="press.mdaText">Lumière sur nos artisans, juin 2025</span></span>
+      </button>
+    </div>
+  </div>
+  <ul class="articles">
+    <li><a href="https://www.lindependant.fr/2026/10/17/apres-plus-dune-annee-de-fermeture-cette-boulangerie-rouvre-a-sainte-marie-la-mer-13607097.php" target="_blank" rel="noopener"><span class="articles__src">L'Indépendant</span><span class="articles__title">Après plus d'une année de fermeture, cette boulangerie rouvre à Sainte-Marie-la-Mer</span><span class="articles__date">17.10.2026</span></a></li>
+    <li><a href="https://www.ici.fr/emissions/bienvenue-chez-vous-le-mag/perpignan-a-23-ans-il-est-deja-a-la-tete-de-3-boulangeries-et-vient-de-passer-a-la-tele-sur-m6-4280118" target="_blank" rel="noopener"><span class="articles__src">ICI Roussillon</span><span class="articles__title">À 23 ans, il est déjà à la tête de 3 boulangeries et vient de passer à la télé sur M6</span><span class="articles__date">11.05.2026</span></a></li>
+    <li><a href="https://www.lindependant.fr/2026/04/19/un-boulanger-catalan-participe-a-une-celebre-emission-televisee-on-a-presente-des-produits-qui-nous-ressemblent-13323566.php" target="_blank" rel="noopener"><span class="articles__src">L'Indépendant</span><span class="articles__title">Un boulanger catalan participe à une célèbre émission télévisée</span><span class="articles__date">19.04.2026</span></a></li>
+    <li><a href="https://www.sudradio.fr/emission/la-france-qui-se-leve-tot-1123" target="_blank" rel="noopener"><span class="articles__src">Sud Radio</span><span class="articles__title">À 23 ans, ce boulanger catalan cartonne</span><span class="articles__date">La France qui se lève tôt</span></a></li>
+    <li><a href="https://actu.fr/occitanie/saint-esteve_66172/a-seulement-21-ans-et-encore-etudiant-il-ouvre-sa-premiere-boulangerie-pres-de-perpignan_61570561.html" target="_blank" rel="noopener"><span class="articles__src">actu.fr</span><span class="articles__title">À seulement 21 ans et encore étudiant, il ouvre sa première boulangerie près de Perpignan</span><span class="articles__date">05.09.2024</span></a></li>
+  </ul>
+</section>
+
+<!-- BOULANGERIES -->
+<section class="shops" id="boulangeries" aria-labelledby="shops-title">
+  <header class="section-head">
+    <h2 class="h2" id="shops-title" data-reveal="split" data-i18n="shops.title">Nos 4 boulangeries</h2>
+    <p class="lead" data-reveal="up" data-i18n="shops.sub">Ouvertes tous les jours de la semaine, dimanche compris.</p>
+  </header>
+  <div class="shops__layout">
+    <div class="map" aria-hidden="true">
+      <svg viewBox="0 0 600 640" class="map__svg">
+        <defs>
+          <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f6d27a" stop-opacity=".9"/><stop offset="1" stop-color="#f6d27a" stop-opacity="0"/></radialGradient>
+          <linearGradient id="sea" x1="0" x2="1"><stop offset="0" stop-color="#16274a" stop-opacity="0"/><stop offset="1" stop-color="#16274a"/></linearGradient>
+        </defs>
+        <path class="map__sea" d="M520 0 C512 120 506 230 512 330 C518 430 510 530 522 640 L600 640 L600 0 Z" fill="url(#sea)"/>
+        <path class="map__coast" d="M520 0 C512 120 506 230 512 330 C518 430 510 530 522 640"/>
+        <path class="map__river" d="M0 380 C80 372 150 395 230 384 C300 374 340 392 400 388 C450 384 480 374 512 378"/>
+        <text class="map__label map__label--sea" x="548" y="300" transform="rotate(90 548 300)" data-i18n="shops.sea">Mer Méditerranée</text>
+        <text class="map__label" x="246" y="420">Perpignan</text>
+        <g class="pin" data-shop="se" transform="translate(110 285)"><circle class="pin__halo" r="34" fill="url(#glow)"/><circle class="pin__dot" r="7"/><text x="14" y="-12">Saint-Estève</text></g>
+        <g class="pin" data-shop="hv" transform="translate(262 380)"><circle class="pin__halo" r="34" fill="url(#glow)"/><circle class="pin__dot" r="7"/><text x="14" y="-12">Halles Vauban</text></g>
+        <g class="pin" data-shop="ca" transform="translate(375 405)"><circle class="pin__halo" r="34" fill="url(#glow)"/><circle class="pin__dot" r="7"/><text x="14" y="22">Cabestany</text></g>
+        <g class="pin" data-shop="sm" transform="translate(470 235)"><circle class="pin__halo" r="34" fill="url(#glow)"/><circle class="pin__dot" r="7"/><text x="-12" y="-16" text-anchor="end">Sainte-Marie-la-Mer</text></g>
+      </svg>
+    </div>
+    <div class="shops__list">
+      <article class="shop" data-shop="se">
+        <figure class="shop__img"><img src="assets/img/boutique-saint-esteve-700.webp" alt="Salle de la boulangerie de Saint-Estève" data-i18n-attr="alt:shops.se.alt" loading="lazy" decoding="async" width="700" height="700"></figure>
+        <div class="shop__body">
+          <h3 class="h3">Saint-Estève</h3>
+          <p class="shop__tag" data-i18n="shops.se.tag">La première, avec terrasse et brunch un dimanche par mois</p>
+          <p class="shop__addr">46 avenue de Rivesaltes<br>66240 Saint-Estève</p>
+          <p class="shop__hours" data-i18n="shops.h1">Tous les jours, 6h30 à 20h</p>
+          <div class="shop__ctas">
+            <a class="btn btn--gold btn--sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=Les+Pains+du+Soleil+46+avenue+de+Rivesaltes+66240+Saint-Est%C3%A8ve" target="_blank" rel="noopener" data-i18n="cta.itineraire">Itinéraire</a>
+            <a class="btn btn--ghost btn--sm" href="tel:+33468632671">04 68 63 26 71</a>
+          </div>
+        </div>
+      </article>
+      <article class="shop" data-shop="hv">
+        <figure class="shop__img"><img src="assets/img/boutique-halles-terrasse-700.webp" alt="Terrasse aux chaises jaunes devant les Halles Vauban" data-i18n-attr="alt:shops.hv.alt" loading="lazy" decoding="async" width="700" height="933"></figure>
+        <div class="shop__body">
+          <h3 class="h3">Perpignan, Halles Vauban</h3>
+          <p class="shop__tag" data-i18n="shops.hv.tag">Côté quai Vauban : terrasse, brunch toute la journée</p>
+          <p class="shop__addr">Les Halles Vauban, 37 quai Sébastien Vauban<br>66000 Perpignan</p>
+          <p class="shop__hours" data-i18n="shops.h2">Lundi au samedi, 7h30 à 20h<br>Dimanche, 8h à 20h</p>
+          <div class="shop__ctas">
+            <a class="btn btn--gold btn--sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=Les+Pains+du+Soleil+37+quai+S%C3%A9bastien+Vauban+66000+Perpignan" target="_blank" rel="noopener" data-i18n="cta.itineraire">Itinéraire</a>
+            <a class="btn btn--ghost btn--sm" href="tel:+33468349172">04 68 34 91 72</a>
+          </div>
+        </div>
+      </article>
+      <article class="shop" data-shop="ca">
+        <figure class="shop__img"><img src="assets/img/boutique-cabestany-700.webp" alt="Enseigne de la boulangerie de Cabestany" data-i18n-attr="alt:shops.ca.alt" loading="lazy" decoding="async" width="700" height="929"></figure>
+        <div class="shop__body">
+          <h3 class="h3">Cabestany</h3>
+          <p class="shop__tag" data-i18n="shops.ca.tag">La boulangerie familiale, au Médipôle</p>
+          <p class="shop__addr">1 rue Ambroise Croizat<br>66330 Cabestany</p>
+          <p class="shop__hours" data-i18n="shops.h1">Tous les jours, 6h30 à 20h</p>
+          <div class="shop__ctas">
+            <a class="btn btn--gold btn--sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=Les+Pains+du+Soleil+1+rue+Ambroise+Croizat+66330+Cabestany" target="_blank" rel="noopener" data-i18n="cta.itineraire">Itinéraire</a>
+            <a class="btn btn--ghost btn--sm" href="tel:+33468838276">04 68 83 82 76</a>
+          </div>
+        </div>
+      </article>
+      <article class="shop" data-shop="sm">
+        <figure class="shop__img"><img src="assets/img/boutique-sainte-marie-2-700.webp" alt="Comptoir et vitrines de la boulangerie de Sainte-Marie-la-Mer" data-i18n-attr="alt:shops.sm.alt" loading="lazy" decoding="async" width="700" height="933"></figure>
+        <div class="shop__body">
+          <h3 class="h3">Sainte-Marie-la-Mer <span class="badge" data-i18n="shops.new">Nouveau</span></h3>
+          <p class="shop__tag" data-i18n="shops.sm.tag">En bord de mer, avec un coin salon de thé</p>
+          <p class="shop__addr">1 rue de la Liberté<br>66470 Sainte-Marie-la-Mer</p>
+          <p class="shop__hours" data-i18n="shops.h1">Tous les jours, 6h30 à 20h</p>
+          <div class="shop__ctas">
+            <a class="btn btn--gold btn--sm" href="https://www.google.com/maps/dir/?api=1&amp;destination=Les+Pains+du+Soleil+1+rue+de+la+Libert%C3%A9+66470+Sainte-Marie-la-Mer" target="_blank" rel="noopener" data-i18n="cta.itineraire">Itinéraire</a>
+            <a class="btn btn--ghost btn--sm" href="tel:+33468097940">04 68 09 79 40</a>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<section class="insta" aria-labelledby="insta-title">
+  <div class="insta__tiles" aria-hidden="true">
+    <img data-speed="-0.15" src="assets/img/vien-newyork-roll-700.webp" alt="" loading="lazy" width="700" height="933">
+    <img data-speed="0.1" src="assets/img/gour-tablettes-2-700.webp" alt="" loading="lazy" width="700" height="875">
+    <img data-speed="-0.08" src="assets/img/boisson-matcha-700.webp" alt="" loading="lazy" width="700" height="933">
+    <img data-speed="0.14" src="assets/img/fete-noel-700.webp" alt="" loading="lazy" width="700" height="857">
+    <img data-speed="-0.2" src="assets/img/brunch-croissant-700.webp" alt="" loading="lazy" width="700" height="875">
+    <img data-speed="0.06" src="assets/img/vien-pain-chocolat-700.webp" alt="" loading="lazy" width="700" height="933">
+  </div>
+  <div class="insta__content">
+    <h2 class="insta__handle" id="insta-title" data-reveal="split">@lespainsdusoleil</h2>
+    <p class="lead" data-reveal="up" data-i18n="insta.text">Nouveautés, coulisses et créations du jour, chaque jour sur Instagram.</p>
+    <a class="btn btn--gold magnetic" href="https://www.instagram.com/lespainsdusoleil/" target="_blank" rel="noopener" data-i18n="insta.cta">Suivre sur Instagram</a>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <p class="footer__word" aria-hidden="true">Les Pains <em>du</em> Soleil</p>
+  <div class="footer__grid">
+    <div>
+      <p class="footer__title" data-i18n="footer.shops">Nos boulangeries</p>
+      <ul>
+        <li>Saint-Estève · <a href="tel:+33468632671">04 68 63 26 71</a></li>
+        <li>Perpignan, Halles Vauban · <a href="tel:+33468349172">04 68 34 91 72</a></li>
+        <li>Cabestany · <a href="tel:+33468838276">04 68 83 82 76</a></li>
+        <li>Sainte-Marie-la-Mer · <a href="tel:+33468097940">04 68 09 79 40</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer__title" data-i18n="footer.contact">Contact</p>
+      <ul>
+        <li><a href="mailto:raphael@lespainsdusoleil.com">raphael@lespainsdusoleil.com</a></li>
+        <li><span data-i18n="footer.brunch">Réservation brunch par SMS</span> · <a href="sms:+33778102754">07 78 10 27 54</a></li>
+        <li><span data-i18n="footer.pros">Restaurateurs, pain livré 7j/7</span> · <a href="tel:+33687767324">06 87 76 73 24</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer__title" data-i18n="footer.follow">Suivez-nous</p>
+      <ul>
+        <li><a href="https://www.instagram.com/lespainsdusoleil/" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://www.facebook.com/lespainsdusoleilmaitreartisan/" target="_blank" rel="noopener">Facebook</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer__bottom">
+    <p>© 2026 Les Pains du Soleil · <span data-i18n="footer.slogan">l'Artisan de vos Envies</span></p>
+    <p><a href="mentions-legales.html" data-i18n="footer.legal">Mentions légales</a> · <a href="confidentialite.html" data-i18n="footer.privacy">Confidentialité</a></p>
+  </div>
+</footer>
+
+<!-- Fenêtre : appeler une boulangerie -->
+<dialog class="sheet" id="call" aria-labelledby="call-title">
+  <form method="dialog"><button class="sheet__close" aria-label="Fermer" data-i18n-attr="aria-label:ui.close">×</button></form>
+  <p class="sheet__title" id="call-title" data-i18n="call.title">Quelle boulangerie appeler ?</p>
+  <ul class="sheet__list">
+    <li><a href="tel:+33468632671"><span>Saint-Estève</span><span>04 68 63 26 71</span></a></li>
+    <li><a href="tel:+33468349172"><span>Perpignan, Halles Vauban</span><span>04 68 34 91 72</span></a></li>
+    <li><a href="tel:+33468838276"><span>Cabestany</span><span>04 68 83 82 76</span></a></li>
+    <li><a href="tel:+33468097940"><span>Sainte-Marie-la-Mer</span><span>04 68 09 79 40</span></a></li>
+  </ul>
+</dialog>
+
+<!-- Fenêtre : lecteur vidéo -->
+<dialog class="player" id="player" aria-label="Lecteur vidéo" data-i18n-attr="aria-label:ui.player">
+  <form method="dialog"><button class="sheet__close" aria-label="Fermer" data-i18n-attr="aria-label:ui.close">×</button></form>
+  <video controls playsinline></video>
+</dialog>
+
+<script src="assets/vendor/gsap.min.js" defer></script>
+<script src="assets/vendor/ScrollTrigger.min.js" defer></script>
+<script src="assets/vendor/SplitText.min.js" defer></script>
+<script src="assets/vendor/Flip.min.js" defer></script>
+<script src="assets/vendor/lenis.min.js" defer></script>
+<script src="assets/js/i18n.js" defer></script>
+<script src="assets/js/main.js" defer></script>
+</body>
+</html>
