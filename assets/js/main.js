@@ -220,18 +220,37 @@
         });
       },
     });
-    let prog = 0, cur = -1, drawn = null, queued = false;
-    const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; render(); }); } };
+    let prog = 0, target = 0, cur = -1, queued = false;
+    // la progression rattrape le défilement en douceur (fluide aussi au doigt, sans lissage du navigateur)
+    const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(tick); } };
+    function tick() {
+      queued = false;
+      prog += (target - prog) * 0.2;
+      if (Math.abs(target - prog) < 0.0005) prog = target;
+      render();
+      if (prog !== target) schedule();
+    }
+    const nearest = (i) => {
+      for (let d = 0; d < FRAMES; d++) {
+        if (ready(frames[i - d])) return frames[i - d];
+        if (ready(frames[i + d])) return frames[i + d];
+      }
+      return null;
+    };
     function render() {
       const x = Math.min(prog * steps.length, steps.length - 1e-6);
       const n = Math.floor(x);
-      const k = Math.round(KEYS[n] + (KEYS[n + 1] - KEYS[n]) * (x - n));
-      for (let d = 0; d < FRAMES; d++) {
-        const img = ready(frames[k - d]) ? frames[k - d] : ready(frames[k + d]) ? frames[k + d] : null;
-        if (img) {
-          if (drawn !== img) ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          drawn = img;
-          break;
+      const kf = KEYS[n] + (KEYS[n + 1] - KEYS[n]) * (x - n);
+      const k = Math.floor(kf), t = kf - k;
+      const a = nearest(k), b = frames[Math.min(FRAMES - 1, k + 1)];
+      if (a) {
+        // fondu entre deux images voisines : le mouvement reste fluide même entre deux images
+        ctx.globalAlpha = 1;
+        ctx.drawImage(a, 0, 0, canvas.width, canvas.height);
+        if (t > 0.02 && b !== a && ready(b)) {
+          ctx.globalAlpha = t;
+          ctx.drawImage(b, 0, 0, canvas.width, canvas.height);
+          ctx.globalAlpha = 1;
         }
       }
       if (n !== cur) {
@@ -240,15 +259,11 @@
       }
       list.style.setProperty('--p', prog.toFixed(3));
     }
-    // l'écran ne se bloque jamais : la scène remonte avec la page mais ralentit en douceur pendant que
-    // le croissant se fait, puis repart ; elle glisse dans la marge prévue sous elle (.fournil__pin)
-    gsap.fromTo('.fournil__title, .fsteps, .fournil__stage', { y: 0 }, {
-      y: () => innerHeight, ease: 'sine.inOut',
-      scrollTrigger: {
-        trigger: '.fournil__stage', start: 'top 72%', end: () => '+=' + innerHeight * 2, scrub: true, invalidateOnRefresh: true,
-        // le croissant se fait pendant la partie la plus lente, quand la scène est entièrement à l'écran
-        onUpdate: (self) => { prog = gsap.utils.clamp(0, 1, (self.progress - 0.2) / 0.6); render(); },
-      },
+    // comme sur le site des burgers : la scène se fige toute seule (CSS sticky) dès qu'elle remplit l'écran,
+    // le croissant se fait au fil du défilement, puis la page reprend une fois qu'il est prêt
+    ScrollTrigger.create({
+      trigger: '.fournil__track', start: 'top top', end: 'bottom bottom',
+      onUpdate: (self) => { target = gsap.utils.clamp(0, 1, (self.progress - 0.03) / 0.87); schedule(); },
     });
   }
 

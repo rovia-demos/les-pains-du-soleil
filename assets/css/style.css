@@ -304,10 +304,12 @@ html:not(.motion) .timeline { overflow-x: auto; }
 .fournil { position: relative; padding-top: clamp(40px, 6vw, 80px); }
 .fournil__pin {
   position: relative; max-width: var(--max); margin: 0 auto;
-  padding: clamp(40px, 6vh, 72px) var(--pad);
+  padding: calc(var(--nav-h) + 12px) var(--pad) 28px;
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 80px); align-items: center;
 }
-.motion .fournil__pin { margin-bottom: 100lvh; } /* la scène glisse dans cette marge pendant que le croissant se fait */
+/* la scène se fige (sticky, sans saut) quand elle remplit l'écran, le temps que le croissant se fasse */
+.motion .fournil__track { height: 420svh; }
+.motion .fournil__pin { position: sticky; top: 0; height: 100svh; }
 .fournil__title { font-size: clamp(40px, 4.6vw, 76px); margin-bottom: clamp(26px, 4vh, 48px); }
 .fsteps { --p: 0; position: relative; display: grid; gap: 2px; margin: 0; padding-left: 32px; list-style: none; }
 .fsteps::before, .fsteps::after { content: ""; position: absolute; left: 6px; top: 18px; bottom: 18px; width: 1px; background: var(--ligne); }
@@ -326,7 +328,7 @@ html:not(.motion) .timeline { overflow-x: auto; }
 .fstep__body > p { overflow: hidden; min-height: 0; color: var(--creme-2); max-width: 36ch; font-size: clamp(16px, 1.15vw, 18.5px); opacity: 0; transition: opacity .6s .15s; }
 .fstep.is-active .fstep__body { grid-template-rows: 1fr; }
 .fstep.is-active .fstep__body > p { opacity: 1; }
-.fournil__stage { position: relative; width: min(100%, 68vh); aspect-ratio: 1; justify-self: center; }
+.fournil__stage { position: relative; width: min(100%, calc(100svh - var(--nav-h) - 56px)); aspect-ratio: 1; justify-self: center; }
 /* les images ont le fond de la page : bords adoucis pour qu'aucun cadre ne se devine, le croissant se fait dans la page */
 .fournil__canvas, .fournil__poster {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -341,10 +343,10 @@ html:not(.motion) .fournil__canvas { display: none; }
 html:not(.motion) .fstep__body { grid-template-rows: 1fr; }
 html:not(.motion) .fstep__body > p { opacity: 1; }
 @media (max-width: 860px) {
-  .fournil__pin { grid-template-columns: 1fr; grid-template-rows: auto auto auto; align-content: center; gap: 6px; padding: 24px 20px 20px; }
+  .fournil__pin { grid-template-columns: 1fr; grid-template-rows: auto auto auto; align-content: center; gap: 6px; padding: calc(var(--nav-h) + 4px) 20px 20px; }
   .fournil__side { display: contents; }
   .fournil__title { order: 0; margin: 0; text-align: center; font-size: clamp(30px, 8.6vw, 46px); }
-  .fournil__stage { order: 1; width: min(100%, 50dvh); }
+  .fournil__stage { order: 1; width: min(100%, 50svh); }
   .fstep__name { font-size: 26px; }
   .fsteps { order: 2; align-self: start; min-height: 150px; padding: 20px 0 0; text-align: center; }
   .fsteps::before, .fsteps::after { left: 18%; right: 18%; top: 0; bottom: auto; width: auto; height: 2px; border-radius: 2px; }
