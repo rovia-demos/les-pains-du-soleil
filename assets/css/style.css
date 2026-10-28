@@ -192,7 +192,7 @@ html:not(.js) .loader { display: none; }
 @media (min-width: 721px) { .menu { display: none !important; } }
 
 /* ---------- Hero ---------- */
-.hero { position: relative; min-height: 100svh; min-height: 100dvh; display: flex; align-items: flex-end; overflow: hidden; isolation: isolate; }
+.hero { position: relative; min-height: calc(100 * var(--vh, 1vh)); display: flex; align-items: flex-end; overflow: hidden; isolation: isolate; }
 .hero__media { position: absolute; inset: 0; z-index: -1; }
 .triptych { position: absolute; inset: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
 .triptych__panel { position: relative; overflow: hidden; }
@@ -208,7 +208,7 @@ html:not(.js) .loader { display: none; }
     linear-gradient(to top, rgba(14, 13, 11, .96) 0%, rgba(14, 13, 11, .5) 40%, rgba(14, 13, 11, .08) 70%, rgba(14, 13, 11, .5) 100%),
     linear-gradient(to right, rgba(14, 13, 11, .78) 0%, rgba(14, 13, 11, .45) 38%, transparent 65%);
 }
-.hero__content { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) clamp(48px, 9vh, 96px); display: grid; gap: 22px; }
+.hero__content { width: 100%; max-width: var(--max); margin: 0 auto; padding: 0 var(--pad) clamp(48px, calc(9 * var(--vh, 1vh)), 96px); display: grid; gap: 22px; }
 .hero__title {
   font-family: var(--serif); font-weight: 500;
   font-size: clamp(52px, 8.4vw, 136px); line-height: 1.04; letter-spacing: -.025em;
@@ -218,7 +218,7 @@ html:not(.js) .loader { display: none; }
 .hero__sub { max-width: 44ch; font-size: clamp(16px, 1.3vw, 20px); color: var(--creme-2); }
 .hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 6px; }
 .sound {
-  position: absolute; right: var(--pad); bottom: clamp(48px, 9vh, 96px); z-index: 2;
+  position: absolute; right: var(--pad); bottom: clamp(48px, calc(9 * var(--vh, 1vh)), 96px); z-index: 2;
   width: 60px; height: 60px; border-radius: 50%;
   border: 1px solid rgba(246, 210, 122, .55); background: rgba(14, 13, 11, .4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
   display: grid; place-items: center; color: var(--or-clair);
@@ -308,9 +308,9 @@ html:not(.motion) .timeline { overflow-x: auto; }
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 80px); align-items: center;
 }
 /* la scène se fige (sticky, sans saut) quand elle remplit l'écran, le temps que le croissant se fasse */
-.motion .fournil__track { height: 420svh; }
-.motion .fournil__pin { position: sticky; top: 0; height: 100svh; }
-.fournil__title { font-size: clamp(40px, 4.6vw, 76px); margin-bottom: clamp(26px, 4vh, 48px); }
+.motion .fournil__track { height: calc(420 * var(--vh, 1vh)); }
+.motion .fournil__pin { position: sticky; top: 0; height: calc(100 * var(--vh, 1vh)); }
+.fournil__title { font-size: clamp(40px, 4.6vw, 76px); margin-bottom: clamp(26px, calc(4 * var(--vh, 1vh)), 48px); }
 .fsteps { --p: 0; position: relative; display: grid; gap: 2px; margin: 0; padding-left: 32px; list-style: none; }
 .fsteps::before, .fsteps::after { content: ""; position: absolute; left: 6px; top: 18px; bottom: 18px; width: 1px; background: var(--ligne); }
 .fsteps::after { display: none; background: linear-gradient(90deg, var(--or-clair), var(--orange)); }
@@ -328,7 +328,7 @@ html:not(.motion) .timeline { overflow-x: auto; }
 .fstep__body > p { overflow: hidden; min-height: 0; color: var(--creme-2); max-width: 36ch; font-size: clamp(16px, 1.15vw, 18.5px); opacity: 0; transition: opacity .6s .15s; }
 .fstep.is-active .fstep__body { grid-template-rows: 1fr; }
 .fstep.is-active .fstep__body > p { opacity: 1; }
-.fournil__stage { position: relative; width: min(100%, calc(100svh - var(--nav-h) - 56px)); aspect-ratio: 1; justify-self: center; }
+.fournil__stage { position: relative; width: min(100%, calc(100 * var(--vh, 1vh) - var(--nav-h) - 56px)); aspect-ratio: 1; justify-self: center; }
 /* les images ont le fond de la page : bords adoucis pour qu'aucun cadre ne se devine, le croissant se fait dans la page */
 .fournil__canvas, .fournil__poster {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -346,7 +346,7 @@ html:not(.motion) .fstep__body > p { opacity: 1; }
   .fournil__pin { grid-template-columns: 1fr; grid-template-rows: auto auto auto; align-content: center; gap: 6px; padding: calc(var(--nav-h) + 4px) 20px 20px; }
   .fournil__side { display: contents; }
   .fournil__title { order: 0; margin: 0; text-align: center; font-size: clamp(30px, 8.6vw, 46px); }
-  .fournil__stage { order: 1; width: min(100%, 50svh); }
+  .fournil__stage { order: 1; width: min(100%, calc(50 * var(--vh, 1vh))); }
   .fstep__name { font-size: 26px; }
   .fsteps { order: 2; align-self: start; min-height: 150px; padding: 20px 0 0; text-align: center; }
   .fsteps::before, .fsteps::after { left: 18%; right: 18%; top: 0; bottom: auto; width: auto; height: 2px; border-radius: 2px; }
@@ -540,7 +540,7 @@ html:not(.motion) .fstep__body > p { opacity: 1; }
 @media (max-width: 560px) { .shop { grid-template-columns: 1fr; } .shop__img { aspect-ratio: 16 / 10; } }
 
 /* ---------- Instagram ---------- */
-.insta { position: relative; margin-top: clamp(100px, 14vw, 200px); min-height: 90vh; display: grid; place-items: center; overflow: hidden; padding: 120px var(--pad); }
+.insta { position: relative; margin-top: clamp(100px, 14vw, 200px); min-height: calc(90 * var(--vh, 1vh)); display: grid; place-items: center; overflow: hidden; padding: 120px var(--pad); }
 .insta__tiles { position: absolute; inset: 0; }
 .insta__tiles img { position: absolute; width: clamp(120px, 15vw, 230px); aspect-ratio: 4 / 5; object-fit: cover; border-radius: var(--r); opacity: .55; }
 .insta__tiles img:nth-child(1) { left: 4%; top: 10%; }

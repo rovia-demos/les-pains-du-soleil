@@ -9,6 +9,20 @@
   gsap.registerPlugin(ScrollTrigger, SplitText, Flip);
   window.LPDS_READY = true;
 
+  // ---------- Hauteur d'écran ----------
+  // mesurée une seule fois (script du <head>, variable --vh) : la barre d'adresse du téléphone qui apparaît ou
+  // disparaît ne fait plus bouger la page. On ne recalcule que si la largeur change (rotation de l'écran).
+  let VH = parseFloat(document.documentElement.style.getPropertyValue('--vh')) * 100 || innerHeight;
+  let VW = innerWidth;
+  ScrollTrigger.config({ ignoreMobileResize: true, autoRefreshEvents: 'visibilitychange,DOMContentLoaded,load' });
+  addEventListener('resize', () => {
+    if (innerWidth === VW) return; // seule la hauteur a changé : on ne touche à rien
+    VW = innerWidth;
+    VH = innerHeight;
+    document.documentElement.style.setProperty('--vh', VH / 100 + 'px');
+    ScrollTrigger.refresh();
+  });
+
   // ---------- Langue ----------
   const i18n = window.LPDS_I18N;
   const lang0 = i18n.initial();
@@ -106,7 +120,7 @@
   const navUpdate = (self) => {
     const y = scrollY;
     nav.classList.toggle('is-scrolled', y > 40);
-    nav.classList.toggle('is-hidden', !menuOpen && self.direction === 1 && y > innerHeight * 0.9);
+    nav.classList.toggle('is-hidden', !menuOpen && self.direction === 1 && y > VH * 0.9);
   };
   // onRefresh aussi : un recalcul de ScrollTrigger peut passer par le haut de page sans nouvel onUpdate
   ScrollTrigger.create({ start: 0, end: 'max', onUpdate: navUpdate, onRefresh: navUpdate });
@@ -152,8 +166,8 @@
     });
     $$('[data-speed]').forEach((el) => {
       const s = parseFloat(el.dataset.speed);
-      gsap.fromTo(el, { y: () => -s * innerHeight * 0.5 }, {
-        y: () => s * innerHeight * 0.5, ease: 'none',
+      gsap.fromTo(el, { y: () => -s * VH * 0.5 }, {
+        y: () => s * VH * 0.5, ease: 'none',
         scrollTrigger: { trigger: el.parentElement, start: 'top bottom', end: 'bottom top', scrub: true, invalidateOnRefresh: true },
       });
     });
@@ -287,7 +301,7 @@
   };
   arrows.forEach((b) => b.addEventListener('click', () => strip.scrollBy({ left: +b.dataset.dir * stepW(), behavior: 'smooth' })));
   strip.addEventListener('scroll', updateArrows, { passive: true });
-  addEventListener('resize', updateArrows);
+  ScrollTrigger.addEventListener('refresh', updateArrows); // largeur changée ou galerie ouverte
   updateArrows();
   if (!reduce) {
     gsap.from('.tlo__item', { x: 120, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: 0.08, scrollTrigger: { trigger: strip, start: 'top 85%', once: true } });
