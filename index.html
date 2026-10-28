@@ -7,7 +7,7 @@
 <meta name="description" content="Maître artisan boulanger : pains au levain, viennoiseries, pâtisseries et trompe-l'œil faits maison. 4 boulangeries autour de Perpignan, ouvertes 7j/7.">
 <!-- Maquette de démonstration : retirer noindex à la mise en ligne définitive -->
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#0b1426">
+<meta name="theme-color" content="#0e0d0b">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Les Pains du Soleil | l'Artisan de vos Envies">
 <meta property="og:description" content="Pains au levain, viennoiseries et pâtisseries faits maison. 4 boulangeries autour de Perpignan, ouvertes 7j/7.">
@@ -195,18 +195,6 @@
   </p>
 </section>
 
-<!-- MANIFESTE + SOLEIL 3D -->
-<section class="manifesto" aria-labelledby="manifesto-title">
-  <div class="manifesto__stage">
-    <canvas class="sun3d" aria-hidden="true"></canvas>
-    <img class="sun-fallback" src="assets/img/soleil-600.webp" alt="" width="600" height="600" aria-hidden="true">
-    <div class="manifesto__text">
-      <h2 class="visually-hidden" id="manifesto-title" data-i18n="manifesto.title">Notre manière de faire</h2>
-      <p class="manifesto__words" data-i18n="manifesto.text">Pendant que la ville dort, nos boulangers pétrissent, façonnent et enfournent. Au lever du soleil, tout est prêt. Fait maison, chaque jour.</p>
-    </div>
-  </div>
-</section>
-
 <!-- HISTOIRE -->
 <section class="story" id="histoire" aria-labelledby="story-title">
   <div class="story__intro">
@@ -275,28 +263,38 @@
 <!-- FOURNIL -->
 <section class="fournil" id="fournil" aria-labelledby="fournil-title">
   <div class="fournil__pin">
-    <div class="fournil__steps">
-      <h2 class="h2" id="fournil-title" data-i18n="fournil.title">Le fournil, <em>la nuit</em></h2>
-      <div class="step is-active">
-        <h3 data-i18n="fournil.s1.title">Le levain naturel</h3>
-        <p data-i18n="fournil.s1.text">Nos pains lèvent lentement, au levain naturel. Le temps fait le goût, la croûte et la mie.</p>
-      </div>
-      <div class="step">
-        <h3 data-i18n="fournil.s2.title">Plus de 20 pains</h3>
-        <p data-i18n="fournil.s2.text">Dont le Soleillou, notre pain signature : croustillant à l'extérieur, moelleux à l'intérieur. Et la Midinette, notre baguette tradition.</p>
-      </div>
-      <div class="step">
-        <h3 data-i18n="fournil.s3.title">Des farines 100 % françaises</h3>
-        <p data-i18n="fournil.s3.text">Et des produits de chez nous, choisis auprès de producteurs du pays catalan.</p>
-      </div>
-      <div class="step">
-        <h3 data-i18n="fournil.s4.title">Fait main, chaque jour</h3>
-        <p data-i18n="fournil.s4.text">Pains, viennoiseries, pâtisseries : tout est façonné à la main par nos équipes, avant l'ouverture.</p>
-      </div>
+    <div class="fournil__side">
+      <h2 class="h2 fournil__title" id="fournil-title" data-i18n="fournil.title">De la farine <em>au croissant</em></h2>
+      <ol class="fsteps">
+        <li class="fstep is-active">
+          <p class="fstep__name" data-i18n="fournil.s1.title">La farine</p>
+          <div class="fstep__body"><p data-i18n="fournil.s1.text">Des farines 100 % françaises. Tout commence ici, la nuit, dans nos fournils.</p></div>
+        </li>
+        <li class="fstep">
+          <p class="fstep__name" data-i18n="fournil.s2.title">Le beurre</p>
+          <div class="fstep__body"><p data-i18n="fournil.s2.text">Du beurre, et pas qu'un peu : nos croissants sont pur beurre.</p></div>
+        </li>
+        <li class="fstep">
+          <p class="fstep__name" data-i18n="fournil.s3.title">La pâte</p>
+          <div class="fstep__body"><p data-i18n="fournil.s3.text">Pétrie, puis laissée au repos pour prendre du goût.</p></div>
+        </li>
+        <li class="fstep">
+          <p class="fstep__name" data-i18n="fournil.s4.title">Le feuilletage</p>
+          <div class="fstep__body"><p data-i18n="fournil.s4.text">Le beurre est enfermé dans la pâte, puis plié et replié. C'est ce qui crée toutes ces couches.</p></div>
+        </li>
+        <li class="fstep">
+          <p class="fstep__name" data-i18n="fournil.s5.title">Le façonnage</p>
+          <div class="fstep__body"><p data-i18n="fournil.s5.text">Chaque croissant est roulé à la main par nos boulangers.</p></div>
+        </li>
+        <li class="fstep">
+          <p class="fstep__name" data-i18n="fournil.s6.title">La cuisson</p>
+          <div class="fstep__body"><p data-i18n="fournil.s6.text">Au four, il gonfle et se dore. Il sera prêt pour l'ouverture de la boulangerie.</p></div>
+        </li>
+      </ol>
     </div>
-    <div class="fournil__screen">
-      <canvas class="fournil__canvas" width="540" height="960" aria-hidden="true"></canvas>
-      <img class="fournil__poster" src="assets/img/fournil-seq/f001.webp" alt="Vitrines de pains et viennoiseries éclairées avant l'ouverture" data-i18n-attr="alt:fournil.alt" width="540" height="960" loading="lazy">
+    <div class="fournil__stage">
+      <canvas class="fournil__canvas" width="900" height="900" aria-hidden="true"></canvas>
+      <img class="fournil__poster" src="assets/img/croissant/etape-6.webp" alt="Croissant pur beurre doré, tout juste sorti du four" data-i18n-attr="alt:fournil.alt" width="900" height="900" loading="lazy">
     </div>
   </div>
   <div class="gestures">
@@ -339,23 +337,23 @@
     <button type="button" class="chip" data-filter="fetes" aria-pressed="false" data-i18n="crea.f.fetes">Fêtes</button>
   </div>
 
-  <div class="gallery">
-    <figure class="card card--tall" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-cafes-700.webp" srcset="assets/img/pat-cafes-700.webp 700w, assets/img/pat-cafes-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Soleil Exotique, Saint-Honoré et Paris-Brest servis avec des cafés" data-i18n-attr="alt:g.cafes" loading="lazy" decoding="async" width="700" height="932"></div><figcaption data-i18n="g.cafes">Soleil Exotique, Saint-Honoré et Paris-Brest</figcaption></figure>
-    <figure class="card" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-croissant-framboise-700.webp" srcset="assets/img/vien-croissant-framboise-700.webp 700w, assets/img/vien-croissant-framboise-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Croissant framboise tenu à la main" data-i18n-attr="alt:g.framboise" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.framboise">Croissant framboise</figcaption></figure>
-    <figure class="card" data-cat="pains"><div class="card__img"><img src="assets/img/pain-soleillou-700.webp" srcset="assets/img/pain-soleillou-700.webp 700w, assets/img/pain-soleillou-1400.webp 1079w" sizes="(min-width: 900px) 33vw, 50vw" alt="Étagère de pains au levain, dont le Soleillou" data-i18n-attr="alt:g.soleillou" loading="lazy" decoding="async" width="700" height="867"></div><figcaption data-i18n="g.soleillou">Le Soleillou et nos pains au levain</figcaption></figure>
-    <figure class="card card--wide" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-croissant-framboise-coupe-700.webp" srcset="assets/img/vien-croissant-framboise-coupe-700.webp 700w, assets/img/vien-croissant-framboise-coupe-1400.webp 1400w" sizes="(min-width: 900px) 66vw, 100vw" alt="Croissant fourré à la framboise coupé en deux" data-i18n-attr="alt:g.fourre" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.fourre">Croissant fourré framboise</figcaption></figure>
-    <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-paris-brest-700.webp" srcset="assets/img/pat-paris-brest-700.webp 700w, assets/img/pat-paris-brest-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Paris-Brest aux éclats de noisette" data-i18n-attr="alt:g.parisbrest" loading="lazy" decoding="async" width="700" height="928"></div><figcaption>Paris-Brest</figcaption></figure>
-    <figure class="card" data-cat="pains"><div class="card__img"><img src="assets/img/pain-mie-700.webp" srcset="assets/img/pain-mie-700.webp 700w, assets/img/pain-mie-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Mie alvéolée d'un pain au levain" data-i18n-attr="alt:g.mie" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.mie">La mie d'un pain au levain</figcaption></figure>
-    <figure class="card card--tall" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-bicolore-700.webp" srcset="assets/img/vien-bicolore-700.webp 700w, assets/img/vien-bicolore-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Viennoiserie bicolore tenue à la main" data-i18n-attr="alt:g.bicolore" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.bicolore">Viennoiseries bicolores</figcaption></figure>
-    <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-intense-700.webp" srcset="assets/img/pat-intense-700.webp 700w, assets/img/pat-intense-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Les pâtisseries L'Intense, Rouge éclat et Soleil Exotique" data-i18n-attr="alt:g.trio" loading="lazy" decoding="async" width="700" height="928"></div><figcaption data-i18n="g.trio">L'Intense, Rouge éclat et Soleil Exotique</figcaption></figure>
+  <div class="gallery is-collapsed">
+    <figure data-feat="1" class="card card--tall" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-cafes-700.webp" srcset="assets/img/pat-cafes-700.webp 700w, assets/img/pat-cafes-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Soleil Exotique, Saint-Honoré et Paris-Brest servis avec des cafés" data-i18n-attr="alt:g.cafes" loading="lazy" decoding="async" width="700" height="932"></div><figcaption data-i18n="g.cafes">Soleil Exotique, Saint-Honoré et Paris-Brest</figcaption></figure>
+    <figure data-feat="1" class="card" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-croissant-framboise-700.webp" srcset="assets/img/vien-croissant-framboise-700.webp 700w, assets/img/vien-croissant-framboise-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Croissant framboise tenu à la main" data-i18n-attr="alt:g.framboise" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.framboise">Croissant framboise</figcaption></figure>
+    <figure data-feat="1" class="card" data-cat="pains"><div class="card__img"><img src="assets/img/pain-soleillou-700.webp" srcset="assets/img/pain-soleillou-700.webp 700w, assets/img/pain-soleillou-1400.webp 1079w" sizes="(min-width: 900px) 33vw, 50vw" alt="Étagère de pains au levain, dont le Soleillou" data-i18n-attr="alt:g.soleillou" loading="lazy" decoding="async" width="700" height="867"></div><figcaption data-i18n="g.soleillou">Le Soleillou et nos pains au levain</figcaption></figure>
+    <figure data-feat="1" class="card card--wide" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-croissant-framboise-coupe-700.webp" srcset="assets/img/vien-croissant-framboise-coupe-700.webp 700w, assets/img/vien-croissant-framboise-coupe-1400.webp 1400w" sizes="(min-width: 900px) 66vw, 100vw" alt="Croissant fourré à la framboise coupé en deux" data-i18n-attr="alt:g.fourre" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.fourre">Croissant fourré framboise</figcaption></figure>
+    <figure data-feat="1" class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-paris-brest-700.webp" srcset="assets/img/pat-paris-brest-700.webp 700w, assets/img/pat-paris-brest-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Paris-Brest aux éclats de noisette" data-i18n-attr="alt:g.parisbrest" loading="lazy" decoding="async" width="700" height="928"></div><figcaption>Paris-Brest</figcaption></figure>
+    <figure data-feat="1" class="card" data-cat="pains"><div class="card__img"><img src="assets/img/pain-mie-700.webp" srcset="assets/img/pain-mie-700.webp 700w, assets/img/pain-mie-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Mie alvéolée d'un pain au levain" data-i18n-attr="alt:g.mie" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.mie">La mie d'un pain au levain</figcaption></figure>
+    <figure data-feat="1" class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-intense-700.webp" srcset="assets/img/pat-intense-700.webp 700w, assets/img/pat-intense-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Les pâtisseries L'Intense, Rouge éclat et Soleil Exotique" data-i18n-attr="alt:g.trio" loading="lazy" decoding="async" width="700" height="928"></div><figcaption data-i18n="g.trio">L'Intense, Rouge éclat et Soleil Exotique</figcaption></figure>
+    <figure data-feat="2" class="card card--tall" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-bicolore-700.webp" srcset="assets/img/vien-bicolore-700.webp 700w, assets/img/vien-bicolore-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Viennoiserie bicolore tenue à la main" data-i18n-attr="alt:g.bicolore" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.bicolore">Viennoiseries bicolores</figcaption></figure>
     <figure class="card" data-cat="gourmandises"><div class="card__img"><img src="assets/img/gour-cookie-framboise-700.webp" srcset="assets/img/gour-cookie-framboise-700.webp 700w, assets/img/gour-cookie-framboise-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Cookie gourmand garni de fruits rouges" data-i18n-attr="alt:g.cookie" loading="lazy" decoding="async" width="700" height="933"></div><figcaption data-i18n="g.cookie">Cookies gourmands</figcaption></figure>
     <figure class="card" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-pain-praline-700.webp" srcset="assets/img/vien-pain-praline-700.webp 700w, assets/img/vien-pain-praline-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Pain au chocolat praliné" data-i18n-attr="alt:g.praline" loading="lazy" decoding="async" width="700" height="874"></div><figcaption data-i18n="g.praline">Pain au chocolat praliné</figcaption></figure>
-    <figure class="card card--wide" data-cat="pains"><div class="card__img"><img src="assets/img/pain-four-700.webp" srcset="assets/img/pain-four-700.webp 700w, assets/img/pain-four-1400.webp 1080w" sizes="(min-width: 900px) 66vw, 100vw" alt="Chariots de pains tout juste sortis du four" data-i18n-attr="alt:g.four" loading="lazy" decoding="async" width="700" height="857"></div><figcaption data-i18n="g.four">Tout juste sortis du four</figcaption></figure>
+    <figure data-feat="2" class="card card--wide" data-cat="pains"><div class="card__img"><img src="assets/img/pain-four-700.webp" srcset="assets/img/pain-four-700.webp 700w, assets/img/pain-four-1400.webp 1080w" sizes="(min-width: 900px) 66vw, 100vw" alt="Chariots de pains tout juste sortis du four" data-i18n-attr="alt:g.four" loading="lazy" decoding="async" width="700" height="857"></div><figcaption data-i18n="g.four">Tout juste sortis du four</figcaption></figure>
     <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-trio-700.webp" srcset="assets/img/pat-trio-700.webp 700w, assets/img/pat-trio-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Pâtisserie Soleil Exotique" data-i18n-attr="alt:g.exotique" loading="lazy" decoding="async" width="700" height="932"></div><figcaption>Soleil Exotique</figcaption></figure>
     <figure class="card" data-cat="gourmandises"><div class="card__img"><img src="assets/img/gour-tablettes-700.webp" srcset="assets/img/gour-tablettes-700.webp 700w, assets/img/gour-tablettes-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Tablettes de chocolat Dubaï, Spéculoos et Mangue-Passion" data-i18n-attr="alt:g.tablettes" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.tablettes">Tablettes Dubaï, Spéculoos et Mangue-Passion</figcaption></figure>
     <figure class="card card--tall" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-croissant-pistache-700.webp" srcset="assets/img/vien-croissant-pistache-700.webp 700w, assets/img/vien-croissant-pistache-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Croissant bicolore à la pistache coupé" data-i18n-attr="alt:g.pistache" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.pistache">Croissant bicolore pistache</figcaption></figure>
     <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-eclairs-700.webp" srcset="assets/img/pat-eclairs-700.webp 700w, assets/img/pat-eclairs-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Éclairs garnis de crème" data-i18n-attr="alt:g.eclairs" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.eclairs">Éclairs</figcaption></figure>
-    <figure class="card" data-cat="pains"><div class="card__img"><img src="assets/img/pain-baguettes-700.webp" srcset="assets/img/pain-baguettes-700.webp 700w, assets/img/pain-baguettes-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Baguettes dorées alignées" data-i18n-attr="alt:g.baguettes" loading="lazy" decoding="async" width="700" height="928"></div><figcaption data-i18n="g.baguettes">Baguettes</figcaption></figure>
+    <figure class="card" data-cat="pains"><div class="card__img"><img src="assets/img/pain-baguettes-700.webp" srcset="assets/img/pain-baguettes-700.webp 700w, assets/img/pain-baguettes-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Baguettes dorées alignées" data-i18n-attr="alt:g.baguettes" loading="lazy" decoding="async" width="700" height="928"></div><figcaption data-i18n="g.baguettes">Baguettes, dont la Midinette, notre tradition</figcaption></figure>
     <figure class="card" data-cat="fetes"><div class="card__img"><img src="assets/img/fete-buche-700.webp" srcset="assets/img/fete-buche-700.webp 700w, assets/img/fete-buche-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Bûche de Noël au chocolat" data-i18n-attr="alt:g.buche" loading="lazy" decoding="async" width="700" height="857"></div><figcaption data-i18n="g.buche">Bûches de Noël</figcaption></figure>
     <figure class="card" data-cat="patisseries"><div class="card__img"><img src="assets/img/pat-coeur-framboise-700.webp" srcset="assets/img/pat-coeur-framboise-700.webp 700w, assets/img/pat-coeur-framboise-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Panier framboises et pistaches" data-i18n-attr="alt:g.panier" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.panier">Panier framboises et pistaches</figcaption></figure>
     <figure class="card" data-cat="viennoiseries"><div class="card__img"><img src="assets/img/vien-cinnamon-roll-700.webp" srcset="assets/img/vien-cinnamon-roll-700.webp 700w, assets/img/vien-cinnamon-roll-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Cinnamon roll et matcha" data-i18n-attr="alt:g.cinnamon" loading="lazy" decoding="async" width="700" height="933"></div><figcaption>Cinnamon roll</figcaption></figure>
@@ -368,6 +366,7 @@
     <figure class="card" data-cat="fetes"><div class="card__img"><img src="assets/img/pat-roses-700.webp" srcset="assets/img/pat-roses-700.webp 700w, assets/img/pat-roses-1400.webp 1080w" sizes="(min-width: 900px) 33vw, 50vw" alt="Pâtisseries en forme de roses pour la Saint-Valentin" data-i18n-attr="alt:g.roses" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.roses">Les roses de la Saint-Valentin</figcaption></figure>
     <figure class="card" data-cat="gourmandises"><div class="card__img"><img src="assets/img/gour-cookie-noisette-700.webp" srcset="assets/img/gour-cookie-noisette-700.webp 700w, assets/img/gour-cookie-noisette-1400.webp 1400w" sizes="(min-width: 900px) 33vw, 50vw" alt="Cookie aux noisettes et caramel" data-i18n-attr="alt:g.cookie2" loading="lazy" decoding="async" width="700" height="875"></div><figcaption data-i18n="g.cookie2">Cookies fourrés</figcaption></figure>
   </div>
+  <div class="gallery__more"><button class="btn btn--ghost magnetic" type="button" data-more data-i18n="crea.more">Voir toutes nos créations</button></div>
 </section>
 
 <!-- SNACKING & BRUNCH -->
@@ -453,22 +452,18 @@
     <p class="lead" data-reveal="up" data-i18n="shops.sub">Ouvertes tous les jours de la semaine, dimanche compris.</p>
   </header>
   <div class="shops__layout">
-    <div class="map" aria-hidden="true">
-      <svg viewBox="0 0 600 640" class="map__svg">
-        <defs>
-          <radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f6d27a" stop-opacity=".9"/><stop offset="1" stop-color="#f6d27a" stop-opacity="0"/></radialGradient>
-          <linearGradient id="sea" x1="0" x2="1"><stop offset="0" stop-color="#16274a" stop-opacity="0"/><stop offset="1" stop-color="#16274a"/></linearGradient>
-        </defs>
-        <path class="map__sea" d="M520 0 C512 120 506 230 512 330 C518 430 510 530 522 640 L600 640 L600 0 Z" fill="url(#sea)"/>
-        <path class="map__coast" d="M520 0 C512 120 506 230 512 330 C518 430 510 530 522 640"/>
-        <path class="map__river" d="M0 380 C80 372 150 395 230 384 C300 374 340 392 400 388 C450 384 480 374 512 378"/>
-        <text class="map__label map__label--sea" x="548" y="300" transform="rotate(90 548 300)" data-i18n="shops.sea">Mer Méditerranée</text>
-        <text class="map__label" x="246" y="420">Perpignan</text>
-        <g class="pin" data-shop="se" transform="translate(110 285)"><circle class="pin__halo" r="34" fill="url(#glow)"/><circle class="pin__dot" r="7"/><text x="14" y="-12">Saint-Estève</text></g>
-        <g class="pin" data-shop="hv" transform="translate(262 380)"><circle class="pin__halo" r="34" fill="url(#glow)"/><circle class="pin__dot" r="7"/><text x="14" y="-12">Halles Vauban</text></g>
-        <g class="pin" data-shop="ca" transform="translate(375 405)"><circle class="pin__halo" r="34" fill="url(#glow)"/><circle class="pin__dot" r="7"/><text x="14" y="22">Cabestany</text></g>
-        <g class="pin" data-shop="sm" transform="translate(470 235)"><circle class="pin__halo" r="34" fill="url(#glow)"/><circle class="pin__dot" r="7"/><text x="-12" y="-16" text-anchor="end">Sainte-Marie-la-Mer</text></g>
+    <div class="map">
+      <div class="map__inner">
+      <img class="map__bg" src="assets/img/carte.svg" alt="Carte de Perpignan et de ses alentours jusqu'à la mer, avec les 4 boulangeries" data-i18n-attr="alt:shops.mapAlt" width="1000" height="881" loading="lazy">
+      <svg class="map__pins" viewBox="0 0 1000 881" aria-hidden="true">
+        <defs><radialGradient id="glow" cx="50%" cy="50%" r="50%"><stop offset="0" stop-color="#f6d27a" stop-opacity=".9"/><stop offset="1" stop-color="#f6d27a" stop-opacity="0"/></radialGradient></defs>
+        <text class="map__city" x="395" y="612" text-anchor="middle">Perpignan</text>
+        <g class="pin" data-shop="se" transform="translate(253 412)"><circle class="pin__halo" r="46" fill="url(#glow)"/><circle class="pin__dot" r="10"/><text x="20" y="-14">Saint-Estève</text></g>
+        <g class="pin" data-shop="hv" transform="translate(388 481)"><circle class="pin__halo" r="46" fill="url(#glow)"/><circle class="pin__dot" r="10"/><text x="-18" y="46" text-anchor="end">Halles Vauban</text></g>
+        <g class="pin" data-shop="ca" transform="translate(505 505)"><circle class="pin__halo" r="46" fill="url(#glow)"/><circle class="pin__dot" r="10"/><text x="18" y="42">Cabestany</text></g>
+        <g class="pin" data-shop="sm" transform="translate(768 364)"><circle class="pin__halo" r="46" fill="url(#glow)"/><circle class="pin__dot" r="10"/><text x="-20" y="-22" text-anchor="end">Sainte-Marie-la-Mer</text></g>
       </svg>
+      </div>
     </div>
     <div class="shops__list">
       <article class="shop" data-shop="se">

@@ -1,6 +1,5 @@
 /* Les Pains du Soleil : animations et interactions */
 (() => {
-  const html = document.documentElement;
   const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
   const desktop = matchMedia('(min-width: 768px)').matches;
@@ -170,55 +169,23 @@
     });
   }
 
-  // ---------- Manifeste + soleil 3D ----------
-  const words = $('.manifesto__words');
-  let wordsTween = null;
-  let sun = null;
-  function buildWords() {
-    const text = words.textContent.trim();
-    words.textContent = '';
-    text.split(/\s+/).forEach((w, i) => {
-      if (i) words.append(' ');
-      const s = document.createElement('span');
-      s.className = 'w';
-      s.textContent = w;
-      words.append(s);
-    });
-    if (wordsTween) wordsTween.kill();
-    wordsTween = gsap.fromTo(words.children, { opacity: 0.12 }, {
-      opacity: 1, stagger: 0.12, ease: 'none',
-      scrollTrigger: { trigger: '.manifesto', start: 'top top', end: '+=140%', scrub: true },
-    });
-  }
-  if (!reduce) {
-    buildWords();
-    ScrollTrigger.create({
-      trigger: '.manifesto', start: 'top top', end: '+=160%', pin: '.manifesto__stage', pinSpacing: true,
-      onUpdate: (self) => sun && sun.setProgress(self.progress),
-    });
-    const canvas = $('.sun3d');
-    const webgl = (() => { try { const c = document.createElement('canvas'); return !!(c.getContext('webgl2') || c.getContext('webgl')); } catch (e) { return false; } })();
-    if (webgl) {
-      ScrollTrigger.create({
-        trigger: '.manifesto', start: 'top 250%', once: true,
-        onEnter: () => import(new URL('assets/js/sun3d.js', document.baseURI).href).then((mod) => {
-          sun = mod.createSun(canvas, { faceUrl: 'assets/img/soleil-visage.webp', small: !desktop });
-          html.classList.add('has-webgl');
-          new IntersectionObserver(([en]) => (en.isIntersecting ? sun.start() : sun.stop())).observe($('.manifesto__stage'));
-          if (finePointer) addEventListener('pointermove', (e) => sun.setPointer(e.clientX / innerWidth * 2 - 1, e.clientY / innerHeight * 2 - 1));
-        }).catch(() => {}),
-      });
-    }
-  }
-
-  // ---------- Frise de l'histoire (défilement horizontal sur ordinateur) ----------
+  // ---------- Frise de l'histoire : le défilement vertical fait avancer la frise ----------
   const mm = gsap.matchMedia();
-  mm.add('(min-width: 861px) and (prefers-reduced-motion: no-preference)', () => {
+  mm.add('(prefers-reduced-motion: no-preference)', () => {
     const track = $('.timeline__track');
     const dist = () => track.scrollWidth - innerWidth;
+    const cardsTl = $$('.milestone');
+    // quand on s'arrête de défiler, la frise se cale sur la carte la plus proche
+    const snapTo = (v) => {
+      const pts = cardsTl.map((c) => Math.min(1, (c.offsetLeft - cardsTl[0].offsetLeft) / dist()));
+      return pts.reduce((a, b) => (Math.abs(b - v) < Math.abs(a - v) ? b : a));
+    };
     const pan = gsap.to(track, {
       x: () => -dist(), ease: 'none',
-      scrollTrigger: { trigger: '.timeline', start: 'center center', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true },
+      scrollTrigger: {
+        trigger: '.timeline', start: 'center center', end: () => '+=' + dist(), pin: true, scrub: 1, invalidateOnRefresh: true,
+        snap: { snapTo, duration: { min: 0.2, max: 0.6 }, delay: 0.08, ease: 'power1.inOut' },
+      },
     });
     gsap.fromTo('.timeline__line span', { scaleX: 0 }, { scaleX: 1, ease: 'none', scrollTrigger: { trigger: '.timeline', start: 'center center', end: () => '+=' + dist(), scrub: true, invalidateOnRefresh: true } });
     $$('.milestone').forEach((m) => {
@@ -226,53 +193,91 @@
     });
   });
 
-  // ---------- Fournil : séquence d'images pilotée par le défilement ----------
+  // ---------- Fournil : de la farine au croissant, piloté par le défilement ----------
   if (!reduce) {
-    const FRAMES = 108;
     const canvas = $('.fournil__canvas');
     const ctx = canvas.getContext('2d');
-    const imgs = [];
-    let drawn = -1;
-    const draw = (i) => {
-      // image la plus proche déjà chargée
-      for (let d = 0; d < FRAMES; d++) {
-        const img = imgs[i - d] || imgs[i + d];
-        if (img && img.complete && img.naturalWidth) {
-          if (drawn !== i) ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-          drawn = i;
-          return;
-        }
-      }
-    };
+    const steps = $$('.fstep');
+    const list = $('.fsteps');
+    const N = steps.length;          // 6 étapes : farine, beurre, pâte, feuilletage, façonnage, cuisson
+    const STILLS = 5, COOK = 60;     // 5 images fixes, puis 60 images de la vidéo de cuisson
+    const stills = [], cook = [];
+    const ready = (img) => img && img.complete && img.naturalWidth;
     ScrollTrigger.create({
       trigger: '.fournil', start: 'top 250%', once: true,
       onEnter: () => {
-        for (let i = 1; i <= FRAMES; i++) {
-          const img = new Image();
-          img.decoding = 'async';
-          img.src = `assets/img/fournil-seq/f${String(i).padStart(3, '0')}.webp`;
-          if (i === 1) img.onload = () => draw(0);
-          imgs.push(img);
+        for (let i = 1; i <= STILLS; i++) {
+          const im = new Image();
+          im.src = `assets/img/croissant/etape-${i}.webp`;
+          im.onload = () => render();
+          stills.push(im);
+        }
+        for (let i = 1; i <= COOK; i++) {
+          const im = new Image();
+          im.decoding = 'async';
+          im.src = `assets/img/croissant/cuisson/c${String(i).padStart(3, '0')}.webp`;
+          cook.push(im);
         }
       },
     });
-    const steps = $$('.fournil .step');
-    let cur = -1;
-    const setStep = (n) => {
-      if (n === cur) return;
-      if (cur >= 0) gsap.to(steps[cur], { autoAlpha: 0, y: -30, duration: 0.5, ease: 'power2.in', overwrite: true });
-      gsap.fromTo(steps[n], { autoAlpha: 0, y: 40 }, { autoAlpha: 1, y: 0, duration: 0.8, ease: 'expo.out', delay: cur >= 0 ? 0.25 : 0, overwrite: true });
-      cur = n;
+    const W = canvas.width;
+    const drawImg = (img, alpha, scale) => {
+      if (!ready(img) || alpha <= 0) return;
+      const z = W * scale;
+      ctx.globalAlpha = alpha;
+      ctx.drawImage(img, (W - z) / 2, (W - z) / 2, z, z);
     };
-    setStep(0);
+    // poussière dorée qui s'envole à chaque nouvelle étape
+    const dust = [];
+    const burst = () => {
+      for (let i = 0; i < 46; i++) {
+        const a = Math.random() * Math.PI * 2, v = 1.2 + Math.random() * 3.2;
+        dust.push({ x: W / 2 + Math.cos(a) * 70, y: W / 2 + Math.sin(a) * 45, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 1.2, r: 1 + Math.random() * 2.6, life: 1 });
+      }
+    };
+    let prog = 0, cur = -1;
+    function render() {
+      const s = Math.min(prog * N, N - 1e-4);
+      const i = Math.floor(s), f = s - i;
+      ctx.globalAlpha = 1;
+      ctx.clearRect(0, 0, W, W);
+      if (i < STILLS - 1) {
+        // fondu enchaîné vers l'étape suivante dans les 40 % de fin de chaque étape
+        const t = gsap.utils.clamp(0, 1, (f - 0.6) / 0.4), e = t * t * (3 - 2 * t);
+        drawImg(stills[i], 1 - e, 1 + 0.03 * f + 0.06 * e);
+        drawImg(stills[i + 1], e, 0.94 + 0.06 * e);
+      } else if (i === STILLS - 1) {
+        drawImg(stills[i], 1, 1 + 0.03 * f);
+      } else {
+        const k = Math.round(gsap.utils.clamp(0, 1, f / 0.85) * (COOK - 1));
+        let img = cook[k];
+        for (let d = 1; !ready(img) && d < COOK; d++) img = cook[k - d] || cook[k + d];
+        drawImg(ready(img) ? img : stills[STILLS - 1], 1, 1.03);
+      }
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.fillStyle = '#f6d27a';
+      for (let j = dust.length - 1; j >= 0; j--) {
+        const d = dust[j];
+        d.x += d.vx; d.y += d.vy; d.vy -= 0.02; d.life -= 0.012;
+        if (d.life <= 0) { dust.splice(j, 1); continue; }
+        ctx.globalAlpha = d.life * 0.9;
+        ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.283); ctx.fill();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = 1;
+      const n = Math.min(N - 1, Math.floor(s + 0.2));
+      if (n !== cur) {
+        if (cur >= 0) burst();
+        steps.forEach((el, k) => { el.classList.toggle('is-active', k === n); el.classList.toggle('is-done', k < n); });
+        cur = n;
+      }
+      list.style.setProperty('--p', Math.min(1, s / (N - 1)).toFixed(3));
+    }
+    gsap.ticker.add(() => { if (dust.length) render(); });
     ScrollTrigger.create({
-      trigger: '.fournil__pin', start: 'top top', end: '+=320%', pin: true, scrub: true,
-      onUpdate: (self) => {
-        draw(Math.round(self.progress * (FRAMES - 1)));
-        setStep(Math.min(steps.length - 1, Math.floor(self.progress * steps.length * 0.999)));
-      },
+      trigger: '.fournil__pin', start: 'top top', end: '+=' + N * 70 + '%', pin: true, scrub: true,
+      onUpdate: (self) => { prog = self.progress; render(); },
     });
-    gsap.from('.fournil__screen', { scale: 0.85, opacity: 0, duration: 1.4, ease: 'expo.out', scrollTrigger: { trigger: '.fournil', start: 'top 70%', once: true } });
   }
 
   // ---------- Créations : glisser les trompe-l'œil, filtrer la galerie ----------
@@ -298,11 +303,14 @@
       onEnter: (b) => gsap.to(b, { opacity: 1, y: 0, duration: 1, ease: 'expo.out', stagger: 0.07 }),
     });
   }
-  chips.forEach((chip) => chip.addEventListener('click', () => {
-    const f = chip.dataset.filter;
+  const gallery = $('.gallery');
+  const more = $('.gallery__more');
+  let expanded = false, filter = 'all';
+  function relayout(change) {
     const state = Flip.getState(cards);
-    cards.forEach((c) => c.classList.toggle('is-hidden', f !== 'all' && c.dataset.cat !== f));
-    chips.forEach((c) => { c.classList.toggle('is-on', c === chip); c.setAttribute('aria-pressed', String(c === chip)); });
+    change();
+    gallery.classList.toggle('is-collapsed', filter === 'all' && !expanded);
+    more.hidden = !(filter === 'all' && !expanded);
     if (reduce) return ScrollTrigger.refresh();
     Flip.from(state, {
       duration: 0.9, ease: 'expo.inOut', absolute: true, scale: true,
@@ -310,7 +318,13 @@
       onLeave: (els) => gsap.to(els, { opacity: 0, scale: 0.85, duration: 0.4 }),
       onComplete: () => ScrollTrigger.refresh(),
     });
-  }));
+  }
+  chips.forEach((chip) => chip.addEventListener('click', () => relayout(() => {
+    filter = chip.dataset.filter;
+    cards.forEach((c) => c.classList.toggle('is-hidden', filter !== 'all' && c.dataset.cat !== filter));
+    chips.forEach((c) => { c.classList.toggle('is-on', c === chip); c.setAttribute('aria-pressed', String(c === chip)); });
+  })));
+  $('[data-more]').addEventListener('click', () => relayout(() => { expanded = true; }));
 
   // ---------- Vidéos qui se chargent à l'approche ----------
   const lazyIO = new IntersectionObserver((entries) => entries.forEach((en) => {
@@ -322,7 +336,8 @@
   }), { rootMargin: '200px 0px' });
   $$('video[data-lazy]').forEach((v) => lazyIO.observe(v));
 
-  // ---------- Presse : bandeau de vidéos ----------
+  // ---------- Presse : bandeau de vidéos qui défile et se fait glisser ----------
+  const reel = $('.reel');
   const reelTrack = $('.reel__track');
   [...reelTrack.children].forEach((c) => {
     const d = c.cloneNode(true);
@@ -331,6 +346,30 @@
     d.tabIndex = -1;
     reelTrack.append(d);
   });
+  let rx = 0, rv = 0, rDrag = null, rHover = false, rMoved = 0, reelInView = false;
+  const AUTO = reduce ? 0 : 0.45; // pixels par image, à 60 images par seconde
+  new IntersectionObserver(([en]) => { reelInView = en.isIntersecting; }).observe(reel);
+  gsap.ticker.add((time, dt) => {
+    if (!reelInView) return;
+    const k = dt / 16.7;
+    if (!rDrag) { rx += (rv - (rHover ? 0 : AUTO)) * k; rv *= 0.94; }
+    const half = reelTrack.scrollWidth / 2;
+    if (rx <= -half) rx += half; else if (rx > 0) rx -= half;
+    reelTrack.style.transform = `translate3d(${rx.toFixed(1)}px, 0, 0)`;
+  });
+  reel.addEventListener('pointerdown', (e) => { rDrag = { last: e.clientX }; rMoved = 0; rv = 0; reel.classList.add('is-dragging'); });
+  addEventListener('pointermove', (e) => {
+    if (!rDrag) return;
+    const dx = e.clientX - rDrag.last;
+    rDrag.last = e.clientX; rx += dx; rv = dx; rMoved += Math.abs(dx);
+  });
+  const endDrag = () => { if (rDrag) { rDrag = null; reel.classList.remove('is-dragging'); } };
+  addEventListener('pointerup', endDrag);
+  addEventListener('pointercancel', endDrag);
+  // un glissement ne doit pas ouvrir la vidéo
+  reel.addEventListener('click', (e) => { if (rMoved > 8) { e.stopPropagation(); e.preventDefault(); } }, true);
+  reel.addEventListener('pointerenter', (e) => { if (e.pointerType === 'mouse') rHover = true; });
+  reel.addEventListener('pointerleave', () => { rHover = false; });
   $$('.clip').forEach((clip) => {
     const v = clip.querySelector('video');
     clip.addEventListener('pointerenter', (e) => {
@@ -340,6 +379,26 @@
     });
     clip.addEventListener('pointerleave', () => v.pause());
   });
+  if (!finePointer && !reduce) {
+    // sur téléphone, l'aperçu de la carte au centre se lance tout seul
+    let playing = null;
+    setInterval(() => {
+      let best = null;
+      if (reelInView) {
+        let bd = Infinity;
+        $$('.clip', reelTrack).forEach((c) => {
+          const r = c.getBoundingClientRect();
+          const d = Math.abs(r.left + r.width / 2 - innerWidth / 2);
+          if (d < bd) { bd = d; best = c; }
+        });
+      }
+      const v = best && best.querySelector('video');
+      if (v === playing) return;
+      if (playing) { playing.pause(); playing.closest('.clip').classList.remove('is-playing'); }
+      if (v) { if (!v.src) v.src = v.dataset.src; v.play().catch(() => {}); best.classList.add('is-playing'); }
+      playing = v;
+    }, 400);
+  }
 
   // ---------- Fenêtres : lecteur vidéo et appel ----------
   const player = $('#player');
@@ -380,7 +439,6 @@
   }));
   if (!reduce) {
     gsap.from('.shop', { y: 60, opacity: 0, duration: 1.1, ease: 'expo.out', stagger: 0.1, scrollTrigger: { trigger: '.shops__list', start: 'top 80%', once: true } });
-    gsap.from('.map__coast', { strokeDashoffset: 400, duration: 2.4, ease: 'power2.out', scrollTrigger: { trigger: '.map', start: 'top 80%', once: true } });
     gsap.from('.pin', { scale: 0, transformOrigin: 'center', duration: 0.9, ease: 'back.out(2.2)', stagger: 0.15, scrollTrigger: { trigger: '.map', start: 'top 75%', once: true } });
   }
 
@@ -412,7 +470,6 @@
   // ---------- Changement de langue ----------
   document.addEventListener('langchange', () => {
     langV++;
-    if (!reduce) buildWords();
     ScrollTrigger.refresh();
   });
 
