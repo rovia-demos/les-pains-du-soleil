@@ -75,7 +75,7 @@ window.I18N = {
     'insta.text': 'New creations, behind the scenes and today’s bakes, every day on Instagram.', 'insta.cta': 'Follow on Instagram',
     'footer.shops': 'Our bakeries', 'footer.contact': 'Contact', 'footer.brunch': 'Brunch bookings by text', 'footer.pros': 'Restaurants: bread delivered 7 days a week',
     'footer.follow': 'Follow us', 'footer.slogan': 'artisans of your cravings', 'footer.legal': 'Legal notice', 'footer.privacy': 'Privacy',
-    'call.title': 'Which bakery would you like to call?', 'ui.close': 'Close', 'ui.player': 'Video player',
+    'call.title': 'Which bakery would you like to call?', 'ui.close': 'Close', 'ui.prev': 'Previous', 'ui.next': 'Next', 'ui.player': 'Video player',
   },
   es: {
     'meta.title': 'Les Pains du Soleil | Panadería artesanal cerca de Perpiñán',
@@ -151,7 +151,7 @@ window.I18N = {
     'insta.text': 'Novedades, entre bastidores y creaciones del día, cada día en Instagram.', 'insta.cta': 'Seguir en Instagram',
     'footer.shops': 'Nuestras panaderías', 'footer.contact': 'Contacto', 'footer.brunch': 'Reservas de brunch por SMS', 'footer.pros': 'Restaurantes: pan a domicilio los 7 días',
     'footer.follow': 'Síguenos', 'footer.slogan': 'artesanos de tus antojos', 'footer.legal': 'Aviso legal', 'footer.privacy': 'Privacidad',
-    'call.title': '¿A qué panadería quieres llamar?', 'ui.close': 'Cerrar', 'ui.player': 'Reproductor de vídeo',
+    'call.title': '¿A qué panadería quieres llamar?', 'ui.close': 'Cerrar', 'ui.prev': 'Anterior', 'ui.next': 'Siguiente', 'ui.player': 'Reproductor de vídeo',
   },
 };
 

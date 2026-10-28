@@ -193,89 +193,55 @@
     });
   });
 
-  // ---------- Fournil : de la farine au croissant, piloté par le défilement ----------
+  // ---------- Fournil : de la farine au croissant, une vidéo lue au rythme du défilement ----------
   if (!reduce) {
     const canvas = $('.fournil__canvas');
     const ctx = canvas.getContext('2d');
     const steps = $$('.fstep');
     const list = $('.fsteps');
-    const N = steps.length;          // 6 étapes : farine, beurre, pâte, feuilletage, façonnage, cuisson
-    const STILLS = 5, COOK = 60;     // 5 images fixes, puis 60 images de la vidéo de cuisson
-    const stills = [], cook = [];
+    const FRAMES = +canvas.dataset.frames;
+    // image de début de chaque étape (farine, beurre, pâte, feuilletage, façonnage, cuisson) puis dernière image :
+    // chaque étape occupe la même longueur de défilement, quelle que soit sa durée dans la vidéo
+    const KEYS = canvas.dataset.steps.split(',').map(Number);
+    const frames = new Array(FRAMES);
     const ready = (img) => img && img.complete && img.naturalWidth;
     ScrollTrigger.create({
       trigger: '.fournil', start: 'top 250%', once: true,
       onEnter: () => {
-        for (let i = 1; i <= STILLS; i++) {
-          const im = new Image();
-          im.src = `assets/img/croissant/etape-${i}.webp`;
-          im.onload = () => render();
-          stills.push(im);
-        }
-        for (let i = 1; i <= COOK; i++) {
+        // on charge d'abord une image sur huit, puis on complète : l'animation est utilisable très vite
+        const order = [];
+        for (const stride of [8, 4, 2, 1]) for (let i = 0; i < FRAMES; i += stride) if (!order.includes(i)) order.push(i);
+        order.forEach((i) => {
           const im = new Image();
           im.decoding = 'async';
-          im.src = `assets/img/croissant/cuisson/c${String(i).padStart(3, '0')}.webp`;
-          cook.push(im);
-        }
+          im.src = `assets/img/croissant/seq/f${String(i + 1).padStart(3, '0')}.webp`;
+          im.onload = schedule; // redessine dès qu'une image plus proche de la bonne arrive
+          frames[i] = im;
+        });
       },
     });
-    const W = canvas.width;
-    const drawImg = (img, alpha, scale) => {
-      if (!ready(img) || alpha <= 0) return;
-      const z = W * scale;
-      ctx.globalAlpha = alpha;
-      ctx.drawImage(img, (W - z) / 2, (W - z) / 2, z, z);
-    };
-    // poussière dorée qui s'envole à chaque nouvelle étape
-    const dust = [];
-    const burst = () => {
-      for (let i = 0; i < 46; i++) {
-        const a = Math.random() * Math.PI * 2, v = 1.2 + Math.random() * 3.2;
-        dust.push({ x: W / 2 + Math.cos(a) * 70, y: W / 2 + Math.sin(a) * 45, vx: Math.cos(a) * v, vy: Math.sin(a) * v - 1.2, r: 1 + Math.random() * 2.6, life: 1 });
-      }
-    };
-    let prog = 0, cur = -1;
+    let prog = 0, cur = -1, drawn = null, queued = false;
+    const schedule = () => { if (!queued) { queued = true; requestAnimationFrame(() => { queued = false; render(); }); } };
     function render() {
-      const s = Math.min(prog * N, N - 1e-4);
-      const i = Math.floor(s), f = s - i;
-      ctx.globalAlpha = 1;
-      ctx.clearRect(0, 0, W, W);
-      if (i < STILLS - 1) {
-        // fondu enchaîné vers l'étape suivante dans les 40 % de fin de chaque étape
-        const t = gsap.utils.clamp(0, 1, (f - 0.6) / 0.4), e = t * t * (3 - 2 * t);
-        drawImg(stills[i], 1 - e, 1 + 0.03 * f + 0.06 * e);
-        drawImg(stills[i + 1], e, 0.94 + 0.06 * e);
-      } else if (i === STILLS - 1) {
-        drawImg(stills[i], 1, 1 + 0.03 * f);
-      } else {
-        const k = Math.round(gsap.utils.clamp(0, 1, f / 0.85) * (COOK - 1));
-        let img = cook[k];
-        for (let d = 1; !ready(img) && d < COOK; d++) img = cook[k - d] || cook[k + d];
-        drawImg(ready(img) ? img : stills[STILLS - 1], 1, 1.03);
+      const x = Math.min(prog * steps.length, steps.length - 1e-6);
+      const n = Math.floor(x);
+      const k = Math.round(KEYS[n] + (KEYS[n + 1] - KEYS[n]) * (x - n));
+      for (let d = 0; d < FRAMES; d++) {
+        const img = ready(frames[k - d]) ? frames[k - d] : ready(frames[k + d]) ? frames[k + d] : null;
+        if (img) {
+          if (drawn !== img) ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+          drawn = img;
+          break;
+        }
       }
-      ctx.globalCompositeOperation = 'lighter';
-      ctx.fillStyle = '#f6d27a';
-      for (let j = dust.length - 1; j >= 0; j--) {
-        const d = dust[j];
-        d.x += d.vx; d.y += d.vy; d.vy -= 0.02; d.life -= 0.012;
-        if (d.life <= 0) { dust.splice(j, 1); continue; }
-        ctx.globalAlpha = d.life * 0.9;
-        ctx.beginPath(); ctx.arc(d.x, d.y, d.r, 0, 6.283); ctx.fill();
-      }
-      ctx.globalCompositeOperation = 'source-over';
-      ctx.globalAlpha = 1;
-      const n = Math.min(N - 1, Math.floor(s + 0.2));
       if (n !== cur) {
-        if (cur >= 0) burst();
-        steps.forEach((el, k) => { el.classList.toggle('is-active', k === n); el.classList.toggle('is-done', k < n); });
+        steps.forEach((el, idx) => { el.classList.toggle('is-active', idx === n); el.classList.toggle('is-done', idx < n); });
         cur = n;
       }
-      list.style.setProperty('--p', Math.min(1, s / (N - 1)).toFixed(3));
+      list.style.setProperty('--p', prog.toFixed(3));
     }
-    gsap.ticker.add(() => { if (dust.length) render(); });
     ScrollTrigger.create({
-      trigger: '.fournil__pin', start: 'top top', end: '+=' + N * 70 + '%', pin: true, scrub: true,
+      trigger: '.fournil__pin', start: 'top top', end: '+=' + steps.length * 75 + '%', pin: true,
       onUpdate: (self) => { prog = self.progress; render(); },
     });
   }
@@ -290,6 +256,18 @@
   });
   addEventListener('pointermove', (e) => { if (drag) strip.scrollLeft = drag.s - (e.clientX - drag.x); });
   addEventListener('pointerup', () => { drag = null; strip.classList.remove('is-dragging'); });
+  // flèches : une carte de plus ou de moins à chaque clic
+  const arrows = $$('.tlo__btn');
+  const stepW = () => strip.querySelector('.tlo__item').offsetWidth + 18;
+  const updateArrows = () => {
+    const max = strip.scrollWidth - strip.clientWidth - 2;
+    arrows[0].disabled = strip.scrollLeft <= 2;
+    arrows[1].disabled = strip.scrollLeft >= max;
+  };
+  arrows.forEach((b) => b.addEventListener('click', () => strip.scrollBy({ left: +b.dataset.dir * stepW(), behavior: 'smooth' })));
+  strip.addEventListener('scroll', updateArrows, { passive: true });
+  addEventListener('resize', updateArrows);
+  updateArrows();
   if (!reduce) {
     gsap.from('.tlo__item', { x: 120, opacity: 0, duration: 1.2, ease: 'expo.out', stagger: 0.08, scrollTrigger: { trigger: strip, start: 'top 85%', once: true } });
   }
