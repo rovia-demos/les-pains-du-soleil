@@ -240,9 +240,15 @@
       }
       list.style.setProperty('--p', prog.toFixed(3));
     }
-    ScrollTrigger.create({
-      trigger: '.fournil__pin', start: 'top top', end: '+=' + steps.length * 75 + '%', pin: true,
-      onUpdate: (self) => { prog = self.progress; render(); },
+    // l'écran ne se bloque jamais : la scène remonte avec la page mais ralentit en douceur pendant que
+    // le croissant se fait, puis repart ; elle glisse dans la marge prévue sous elle (.fournil__pin)
+    gsap.fromTo('.fournil__title, .fsteps, .fournil__stage', { y: 0 }, {
+      y: () => innerHeight, ease: 'sine.inOut',
+      scrollTrigger: {
+        trigger: '.fournil__stage', start: 'top 72%', end: () => '+=' + innerHeight * 2, scrub: true, invalidateOnRefresh: true,
+        // le croissant se fait pendant la partie la plus lente, quand la scène est entièrement à l'écran
+        onUpdate: (self) => { prog = gsap.utils.clamp(0, 1, (self.progress - 0.2) / 0.6); render(); },
+      },
     });
   }
 

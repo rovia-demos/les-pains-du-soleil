@@ -303,10 +303,11 @@ html:not(.motion) .timeline { overflow-x: auto; }
 /* ---------- Fournil : de la farine au croissant ---------- */
 .fournil { position: relative; padding-top: clamp(40px, 6vw, 80px); }
 .fournil__pin {
-  position: relative; height: 100svh; height: 100dvh; max-width: var(--max); margin: 0 auto;
-  padding: calc(var(--nav-h) + 12px) var(--pad) 28px;
+  position: relative; max-width: var(--max); margin: 0 auto;
+  padding: clamp(40px, 6vh, 72px) var(--pad);
   display: grid; grid-template-columns: minmax(0, 5fr) minmax(0, 7fr); gap: clamp(28px, 5vw, 80px); align-items: center;
 }
+.motion .fournil__pin { margin-bottom: 100lvh; } /* la scène glisse dans cette marge pendant que le croissant se fait */
 .fournil__title { font-size: clamp(40px, 4.6vw, 76px); margin-bottom: clamp(26px, 4vh, 48px); }
 .fsteps { --p: 0; position: relative; display: grid; gap: 2px; margin: 0; padding-left: 32px; list-style: none; }
 .fsteps::before, .fsteps::after { content: ""; position: absolute; left: 6px; top: 18px; bottom: 18px; width: 1px; background: var(--ligne); }
@@ -325,20 +326,22 @@ html:not(.motion) .timeline { overflow-x: auto; }
 .fstep__body > p { overflow: hidden; min-height: 0; color: var(--creme-2); max-width: 36ch; font-size: clamp(16px, 1.15vw, 18.5px); opacity: 0; transition: opacity .6s .15s; }
 .fstep.is-active .fstep__body { grid-template-rows: 1fr; }
 .fstep.is-active .fstep__body > p { opacity: 1; }
-.fournil__stage { position: relative; width: min(100%, calc(100dvh - var(--nav-h) - 56px)); aspect-ratio: 1; justify-self: center; }
-.fournil__stage::before { content: ""; position: absolute; inset: 10%; border-radius: 50%; background: radial-gradient(circle, rgba(246, 190, 90, .2), transparent 65%); }
+.fournil__stage { position: relative; width: min(100%, 68vh); aspect-ratio: 1; justify-self: center; }
+/* les images ont le fond de la page : bords adoucis pour qu'aucun cadre ne se devine, le croissant se fait dans la page */
 .fournil__canvas, .fournil__poster {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 50%, transparent 71%); mask-image: radial-gradient(circle at 50% 50%, #000 50%, transparent 71%);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent), linear-gradient(transparent, #000 8%, #000 92%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent), linear-gradient(transparent, #000 8%, #000 92%, transparent);
+  mask-composite: intersect;
 }
 .fournil__canvas { z-index: 1; }
 .motion .fournil__poster { visibility: hidden; }
 html:not(.motion) .fournil__canvas { display: none; }
-html:not(.motion) .fournil__pin { height: auto; min-height: 100dvh; }
 html:not(.motion) .fstep__body { grid-template-rows: 1fr; }
 html:not(.motion) .fstep__body > p { opacity: 1; }
 @media (max-width: 860px) {
-  .fournil__pin { grid-template-columns: 1fr; grid-template-rows: auto auto auto; align-content: center; gap: 6px; padding: calc(var(--nav-h) + 4px) 20px 20px; }
+  .fournil__pin { grid-template-columns: 1fr; grid-template-rows: auto auto auto; align-content: center; gap: 6px; padding: 24px 20px 20px; }
   .fournil__side { display: contents; }
   .fournil__title { order: 0; margin: 0; text-align: center; font-size: clamp(30px, 8.6vw, 46px); }
   .fournil__stage { order: 1; width: min(100%, 50dvh); }
