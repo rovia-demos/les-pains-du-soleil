@@ -235,7 +235,7 @@
         order.forEach((i) => {
           const im = new Image();
           im.decoding = 'async';
-          im.src = `assets/img/croissant/seq/f${String(i + 1).padStart(3, '0')}.webp`;
+          im.src = `assets/img/croissant/seq/f${String(i + 1).padStart(3, '0')}.webp?v=2`;
           im.onload = schedule; // redessine dès qu'une image plus proche de la bonne arrive
           frames[i] = im;
         });
