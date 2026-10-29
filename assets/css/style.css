@@ -172,7 +172,8 @@ html:not(.js) .loader { display: none; }
 .burger[aria-expanded="true"] span:last-child { transform: translateY(-4px) rotate(-45deg); }
 
 .menu {
-  position: fixed; inset: 0; z-index: 60; background: var(--nuit);
+  /* sous la barre du haut, dont le bouton devient la croix qui ferme le menu */
+  position: fixed; inset: 0; z-index: 45; background: var(--nuit);
   padding: calc(var(--nav-h) + 24px) 24px 32px; display: flex; flex-direction: column; justify-content: space-between;
 }
 .menu[hidden] { display: none; }
