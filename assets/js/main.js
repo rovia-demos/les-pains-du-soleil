@@ -380,7 +380,8 @@
     reelTrack.append(d);
   });
   let rx = 0, rv = 0, rDrag = null, rHover = false, rMoved = 0, reelInView = false;
-  const AUTO = reduce ? 0 : 0.45; // pixels par image, à 60 images par seconde
+  // pixels par image, à 60 images par seconde ; deux fois plus vite au doigt, où il paraissait trop lent
+  const AUTO = reduce ? 0 : finePointer ? 0.45 : 0.9;
   new IntersectionObserver(([en]) => { reelInView = en.isIntersecting; }).observe(reel);
   gsap.ticker.add((time, dt) => {
     if (!reelInView) return;
